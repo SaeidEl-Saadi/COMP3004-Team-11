@@ -21,6 +21,12 @@ void MainWindow::batteryDecrease() {
     if (battery == 0) {
         timer->stop();
         return;
+    } else if (battery <= 10) {
+        ui->battery->setTextColor("red");
+        ui->batteryLabel->setStyleSheet("font: 10pt DejaVu Sans Mono;\ncolor: red;");
+    } else {
+        ui->battery->setTextColor("black");
+        ui->batteryLabel->setStyleSheet("font: 10pt DejaVu Sans Mono;\ncolor: black;");
     }
     ui->battery->clear();
     ui->battery->append(QString::fromStdString(std::to_string(battery) + "%"));
