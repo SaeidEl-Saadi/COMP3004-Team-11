@@ -21,8 +21,13 @@ private slots:
     void batteryDecrease();
 
 private:
+    //variables
     Ui::MainWindow *ui;
     QTimer *timer;
     int battery = 100;
+    std::vector<QWidget*> menus;
+
+    //functions
+    void hideMenus();
 };
 #endif // MAINWINDOW_H

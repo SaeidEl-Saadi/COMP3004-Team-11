@@ -42,6 +42,57 @@
       <string notr="true">background-color: rgb(246, 245, 244);
 </string>
      </property>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>50</y>
+        <width>171</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Start New Session</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>100</y>
+        <width>171</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>View Session History</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>150</y>
+        <width>171</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Set Date and Time</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QPushButton" name="menu">
      <property name="enabled">
@@ -79,6 +130,9 @@ background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pause">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>180</x>
@@ -96,6 +150,9 @@ background-color: rgb(255, 255, 255);</string>
      </property>
     </widget>
     <widget class="QPushButton" name="play">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -252,6 +309,131 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans Mono'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;100%&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
+    </widget>
+    <widget class="QWidget" name="sessionMenu" native="true">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>251</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(246, 245, 244);
+</string>
+     </property>
+     <widget class="QLabel" name="sessionTimer">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>50</y>
+        <width>101</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 30pt &quot;DejaVu Sans Mono&quot;;</string>
+      </property>
+      <property name="text">
+       <string>0:00</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBar">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>140</y>
+        <width>141</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>DejaVu Sans Mono</family>
+       </font>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="sessionHistoryMenu" native="true">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>251</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(246, 245, 244);
+</string>
+     </property>
+     <widget class="QTextEdit" name="sessionLogs">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>211</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="setDateTimeMenu" native="true">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>251</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(246, 245, 244);
+</string>
+     </property>
+     <widget class="QDateTimeEdit" name="DateTime">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>194</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="setDateTime">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>120</y>
+        <width>83</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Set</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QTextEdit" name="eventLog">
