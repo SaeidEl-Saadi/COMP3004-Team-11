@@ -23,6 +23,14 @@ private slots:
     void handleMenuButton();
     void handleChargeDeviceButton();
     void handleLowBatteryButton();
+    void handleNewSessionButton();
+    void handleSessionHistoryButton();
+    void handleDateTimeButton();
+    void handlePauseButton();
+    void handlePlayButton();
+    void handleStopButton();
+    void handleUploadButton();
+    void handleDisconnectHeadsetButton();
 
 private:
     //variables
@@ -34,5 +42,6 @@ private:
 
     //functions
     void hideMenus();
+    void turnOffLights();
 };
 #endif // MAINWINDOW_H

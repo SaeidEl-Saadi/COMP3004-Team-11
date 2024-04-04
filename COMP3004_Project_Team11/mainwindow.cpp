@@ -25,6 +25,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->menu, &QAbstractButton::released, this, &MainWindow::handleMenuButton);
     connect(ui->chargeDevice, &QAbstractButton::released, this, &MainWindow::handleChargeDeviceButton);
     connect(ui->lowBattery, &QAbstractButton::released, this, &MainWindow::handleLowBatteryButton);
+    connect(ui->newSessionButton, &QAbstractButton::released, this, &MainWindow::handleNewSessionButton);
+    connect(ui->viewSessionButton, &QAbstractButton::released, this, &MainWindow::handleSessionHistoryButton);
+    connect(ui->setDateTimeButton, &QAbstractButton::released, this, &MainWindow::handleDateTimeButton);
+    connect(ui->upload, &QAbstractButton::released, this, &MainWindow::handleUploadButton);
+    connect(ui->play, &QAbstractButton::released, this, &MainWindow::handlePlayButton);
+    connect(ui->pause, &QAbstractButton::released, this, &MainWindow::handlePauseButton);
+    connect(ui->stop, &QAbstractButton::released, this, &MainWindow::handleStopButton);
+    connect(ui->dcHeadset, &QAbstractButton::released, this, &MainWindow::handleDisconnectHeadsetButton);
+
 }
 
 MainWindow::~MainWindow()
@@ -42,6 +51,12 @@ void MainWindow::hideMenus() {
     ui->offScreen->hide();
 }
 
+void MainWindow::turnOffLights() {
+    ui->redLight->setStyleSheet("background-color: rgba(255, 0, 0, 0.2);");
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 0.2);");
+    ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 0.2);");
+}
+
 //slots
 void MainWindow::handlePowerButton() {
     if (!isPowerOff) {
@@ -50,10 +65,14 @@ void MainWindow::handlePowerButton() {
         ui->offScreen->show();
         ui->play->setDisabled(true);
         ui->pause->setDisabled(true);
+        ui->stop->setDisabled(true);
+        ui->upload->setDisabled(true);
+        turnOffLights();
         timer->stop();
     } else {
         isPowerOff = false;
         ui->menu->setDisabled(false);
+        ui->upload->setDisabled(false);
         hideMenus();
         ui->offScreen->hide();
         menus[0]->show();
@@ -66,20 +85,74 @@ void MainWindow::handlePowerButton() {
 void MainWindow::handleMenuButton() {
     hideMenus();
     menus[0]->show();
+    ui->pause->setDisabled(true);
+    ui->play->setDisabled(true);
+    ui->stop->setDisabled(true);
+    ui->upload->setDisabled(false);
+    turnOffLights();
 }
 
 void MainWindow::handleChargeDeviceButton() {
     battery = 101;
     batteryDecrease();
-    timer->start(10000);
 
     ui->power->setDisabled(false);
+
+    if (!isPowerOff) {
+        timer->start(10000);
+    }
 }
 
 void MainWindow::handleLowBatteryButton() {
     battery = 15;
     batteryDecrease();
-    timer->start(1000);
+    if (!isPowerOff) {
+        timer->start(1000);
+    }
+}
+
+void MainWindow::handleNewSessionButton() {
+    hideMenus();
+    menus[1]->show();
+    ui->menu->setDisabled(true);
+    ui->pause->setDisabled(false);
+    ui->play->setDisabled(false);
+    ui->stop->setDisabled(false);
+    ui->upload->setDisabled(true);
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    //CALL NEW SESSION WITHIN DEVICE
+}
+
+void MainWindow::handleSessionHistoryButton() {
+    hideMenus();
+    menus[2]->show();
+}
+
+void MainWindow::handleDateTimeButton() {
+    hideMenus();
+    menus[3]->show();
+}
+
+void MainWindow::handlePauseButton() {
+
+}
+
+void MainWindow::handlePlayButton() {
+
+}
+
+void MainWindow::handleStopButton() {
+    //RESET SESSION HUD TIMER AND PROGRESS BAR
+    ui->menu->setDisabled(false);
+    handleMenuButton();
+}
+
+void MainWindow::handleUploadButton() {
+
+}
+
+void MainWindow::handleDisconnectHeadsetButton() {
+
 }
 
 
