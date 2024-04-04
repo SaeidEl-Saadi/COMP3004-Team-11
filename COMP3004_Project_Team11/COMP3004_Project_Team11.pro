@@ -10,10 +10,23 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    brainwavegenerator.cpp \
+    signalgenerator.cpp \
+    site.cpp \
+    treatment.cpp \
+    processsignal.cpp \
+    session.cpp 
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    brainwavegenerator.h \
+    signalgenerator.h \
+    site.h \
+    treatment.h \
+    processsignal.h \
+    session.h 
+
 
 FORMS += \
     mainwindow.ui
