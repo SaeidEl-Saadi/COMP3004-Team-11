@@ -19,6 +19,10 @@ public:
 
 private slots:
     void batteryDecrease();
+    void handlePowerButton();
+    void handleMenuButton();
+    void handleChargeDeviceButton();
+    void handleLowBatteryButton();
 
 private:
     //variables
@@ -26,6 +30,7 @@ private:
     QTimer *timer;
     int battery = 100;
     std::vector<QWidget*> menus;
+    bool isPowerOff = false;
 
     //functions
     void hideMenus();

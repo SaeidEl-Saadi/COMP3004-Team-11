@@ -435,6 +435,20 @@ background-color: rgb(255, 255, 255);</string>
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="offScreen" native="true">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>251</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(246, 245, 244);
+</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QTextEdit" name="eventLog">
     <property name="geometry">
@@ -557,7 +571,7 @@ color: rgb(0, 0, 0);</string>
        <x>30</x>
        <y>30</y>
        <width>111</width>
-       <height>101</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -574,7 +588,7 @@ background-color: rgb(255, 255, 255);</string>
        <x>180</x>
        <y>30</y>
        <width>111</width>
-       <height>101</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -584,6 +598,23 @@ background-color: rgb(255, 255, 255);</string>
      <property name="text">
       <string>Disconnect
 Headset</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="chargeDevice">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>90</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Charge Device</string>
      </property>
     </widget>
    </widget>
