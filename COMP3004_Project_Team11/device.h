@@ -9,6 +9,9 @@
 #include "session.h"
 #include "brainwavegenerator.h"
 #include "processsignal.h"
+//#include "mainwindow.h"
+
+class MainWindow;
 
 class Device : public QObject {
     Q_OBJECT
@@ -19,7 +22,7 @@ class Device : public QObject {
         QVector<Session*> sessions; 
         QDateTime datetime; // current date and time by the user
         QDateTime actualTimeSet; // real current system time when the device is set
-        MainWindow* mainWindow;
+        // MainWindow* mainWindow;
         ProcessSignal* processSignal; // algo for signal processing
         int duration; // just in case we need it
         int sampleRate; // just in case we need it
@@ -27,7 +30,7 @@ class Device : public QObject {
     // methods
     public:
         // constructor
-        Device(int sampleRate, int duration, QObject *parent = nullptr);
+        Device(int sampleRate, int duration, MainWindow* ui, QObject *parent = nullptr);
 
         //setters and getters
         QVector<Site*> getSites() { return sites; }

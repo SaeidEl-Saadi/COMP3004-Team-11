@@ -1,6 +1,7 @@
 #include "device.h"
+#include "mainwindow.h"
 
-Device::Device(int sampleRate, int duration, QObject *parent) : QObject{parent} {
+Device::Device(int sampleRate, int duration, MainWindow* ui, QObject *parent) : QObject{parent} {
 
     // set the sample rate(just in case to have it)
     this->sampleRate = sampleRate;
