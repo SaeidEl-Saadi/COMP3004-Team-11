@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "treatment.h"
-#include "signalgenerator.h"
+#include <vector>
 
 //using namespace SignalGenerator;
 //using namespace QtCharts;
@@ -14,18 +14,21 @@ class Site : public QObject
 
     private:
         // starts with signal being the baseline and then we keep adding to it
-        QVector<double> currSignal;
+        std::vector<double> currSignal;
 
     public:
-        explicit Site(QObject *parent = nullptr);
+        Site(QObject *parent = nullptr);
         void readOriginalSignal();
 
+        // setter
+        void setSignal(std::vector<double> signal) { currSignal = signal; }
+
         //getter
-        QVector<double> getSignal() { return currSignal; }
+        std::vector<double> getSignal() { return currSignal; }
 
     // internal
     private:
-        void applySignal(QVector<double> signal);
+        void applySignal(std::vector<double> signal);
 };
 
 #endif // SITE_H

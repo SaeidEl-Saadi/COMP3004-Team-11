@@ -13,7 +13,6 @@ SOURCES += \
     mainwindow.cpp \
     processsignal.cpp \
     session.cpp \
-    signalgenerator.cpp \
     site.cpp \
     treatment.cpp
 
@@ -22,7 +21,6 @@ HEADERS += \
     mainwindow.h \
     processsignal.h \
     session.h \
-    signalgenerator.h \
     site.h \
     treatment.h
 
