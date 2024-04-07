@@ -9,6 +9,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class Device;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -39,6 +41,7 @@ private:
     int battery = 100;
     std::vector<QWidget*> menus;
     bool isPowerOff = false;
+    Device* device;
 
     //functions
     void hideMenus();
