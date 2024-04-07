@@ -61,7 +61,7 @@ void ProcessSignal::applyFFT(std::vector<std::complex<double>>& data) {
 }
 
 // Converts a real-valued signal to complex and performs FFT on it
-std::vector<std::complex<double>> ProcessSignal::performFFT(const std::vector<double>& realSignal) {
+std::vector<std::complex<double>> ProcessSignal::performFFT(std::vector<double>& realSignal) {
     std::vector<std::complex<double>> FFTSignal(realSignal.size());
 
     // Convert each real sample to a complex number with zero imaginary part
@@ -92,3 +92,35 @@ double ProcessSignal::calculateAverageFrequencyUsingPSD(const std::vector<std::c
     if (totalPower == 0) return 0; // Avoid division by zero
     return weightedFrequencySum / totalPower; // Return the average frequency weighted by power
 }
+
+void ProcessSignal::printFFT( std::vector<std::complex<double>>& fftResult, double sampleRate) {
+    size_t N = fftResult.size();
+    qDebug() << "Frequency (Hz)\tMagnitude\n";
+    
+    // Print only the first half of the FFT result due to symmetry in FFT of real-valued signals
+    for (size_t i = 0; i < N / 2; ++i) {
+        // Calculate the frequency for this bin
+        double frequency = static_cast<double>(i) * sampleRate / N;
+        
+        // Calculate the magnitude of the FFT at this frequency
+        double magnitude = std::abs(fftResult[i]);
+        
+        qDebug() << frequency << "\t" << magnitude << "\n";
+    }
+}
+
+// double ProcessSignal::calculateBandPower(const std::vector<std::complex<double>>& fftResult, double sampleRate, double startFreq, double endFreq) {
+//     size_t N = fftResult.size();
+//     double bandPower = 0.0;
+
+//     // Calculate the index range corresponding to the desired frequency band
+//     size_t startIndex = static_cast<size_t>((startFreq * N) / sampleRate);
+//     size_t endIndex = static_cast<size_t>((endFreq * N) / sampleRate);
+
+//     for (size_t i = startIndex; i <= endIndex && i < N / 2; ++i) {
+//         // Sum the power (magnitude squared) of each FFT bin within the band
+//         bandPower += std::norm(fftResult[i]);
+//     }
+
+//     return bandPower;
+// }

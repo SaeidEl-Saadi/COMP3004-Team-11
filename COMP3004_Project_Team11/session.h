@@ -1,33 +1,39 @@
 #ifndef SESSION_H
 #define SESSION_H
 #include "site.h"
-#include <QDate>
+#include "brainwavegenerator.h"
+#include "brainregion.h"
+#include <QDateTime>
 #include <QObject>
 #include <QVector>
-#include "brainwavegenerator.h"
 #include <vector>
-#include <iostream>
+
 
 class Session : QObject {
     Q_OBJECT
     
+    // attributes
     private:
-        QVector<Site*> sites;
-        QDate date; // date and time it starts
-        QVector<double> avgBefore;
-        QVector<double> avgAfter;
-        BrainWaveGenerator* generator;
+        QDateTime datetime;
+        std::vector<double> avgBefore;
+        std::vector<double> avgAfter;
 
+    // methods
     public:
-        Session(QDate date, QObject *parent = nullptr);
-        void setDate(QDate date);
-        QVector<Site*> getSites();
-        QDate getDate();
-        void readSignal(); // read the signals from the sites
-        void generateInitialSignals();
-        enum BrainRegion { Delta, Theta, Alpha, Beta, Gamma };
+        // constructor
+        Session(QDateTime datetime, QObject *parent = nullptr);
+
+        //setters and getters
+        void setDate(QDateTime datetime) { this->datetime = datetime; }
+        QDateTime getDate() { return datetime; }
+
+        std::vector<double> getAvgBefore() { return avgBefore; }
+        void setAvgBefore(std::vector<double> avgBefore) { this->avgBefore = avgBefore; }
+        
+        std::vector<double> getAvgAfter() { return avgAfter; }
+        void setAvgAfter(std::vector<double> avgAfter) { this->avgAfter = avgAfter; }
+    
     private:
-//        void readSignal(); // read the signals from the sites
 
 
 

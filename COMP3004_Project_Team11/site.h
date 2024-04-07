@@ -2,33 +2,32 @@
 #define SITE_H
 
 #include <QObject>
-#include "treatment.h"
+#include <QDebug>
 #include <vector>
-
-//using namespace SignalGenerator;
-//using namespace QtCharts;
+#include "brainwavegenerator.h"
 
 class Site : public QObject
 {
     Q_OBJECT
 
+    // attributes
     private:
-        // starts with signal being the baseline and then we keep adding to it
+        BrainWaveGenerator* generator;
         std::vector<double> currSignal;
 
+    // methods
     public:
-        Site(QObject *parent = nullptr);
-        void readOriginalSignal();
+        Site(BrainWaveGenerator* generator , QObject *parent = nullptr);
 
-        // setter
+        // getters and setters
         void setSignal(std::vector<double> signal) { currSignal = signal; }
-
-        //getter
         std::vector<double> getSignal() { return currSignal; }
+        
+        void readInitialSignal(); 
 
-    // internal
     private:
-        void applySignal(std::vector<double> signal);
+        void generateSignal();
+
 };
 
 #endif // SITE_H

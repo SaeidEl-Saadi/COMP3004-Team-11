@@ -14,7 +14,8 @@ SOURCES += \
     processsignal.cpp \
     session.cpp \
     site.cpp \
-    treatment.cpp
+    treatment.cpp \
+    device.cpp 
 
 HEADERS += \
     brainwavegenerator.h \
@@ -22,7 +23,9 @@ HEADERS += \
     processsignal.h \
     session.h \
     site.h \
-    treatment.h
+    treatment.h \
+    brainregion.h \
+    device.h
 
 FORMS += \
     mainwindow.ui

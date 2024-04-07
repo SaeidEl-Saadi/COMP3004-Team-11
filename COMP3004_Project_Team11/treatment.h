@@ -12,8 +12,8 @@ class Treatment : public QObject {
 public:
     explicit Treatment(QObject *parent = nullptr);
 
-    double calculateAverageFrequency(const std::vector<double>& signal, double sampleRate);
-    std::vector<double> applyTreatment(const std::vector<double>& originalSignal, double sampleRate);
+    double calculateAverageFrequency( std::vector<double>& signal, double sampleRate);
+    std::vector<double> applyTreatment( std::vector<double>& originalSignal, double sampleRate);
 
 private:
     std::vector<double> generateSineWave(double frequency, size_t duration, double sampleRate);

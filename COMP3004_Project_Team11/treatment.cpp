@@ -5,7 +5,7 @@ Treatment::Treatment(QObject *parent)
     : QObject(parent) {}
 
 // Function to calculate the average frequency of a given signal.
-double Treatment::calculateAverageFrequency(const std::vector<double>& signal, double sampleRate) {
+double Treatment::calculateAverageFrequency( std::vector<double>& signal, double sampleRate) {
     // Create an instance of the ProcessSignal class
     ProcessSignal processSignal;
 
@@ -17,7 +17,7 @@ double Treatment::calculateAverageFrequency(const std::vector<double>& signal, d
 }
 
 // Function to apply treatment to the original signal.
-std::vector<double> Treatment::applyTreatment(const std::vector<double>& originalSignal, double sampleRate) {
+std::vector<double> Treatment::applyTreatment( std::vector<double>& originalSignal, double sampleRate) {
     // Create an instance of the ProcessSignal class
     ProcessSignal processSignal;
 
