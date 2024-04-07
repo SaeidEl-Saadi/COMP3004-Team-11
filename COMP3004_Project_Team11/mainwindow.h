@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QObject>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -33,6 +34,7 @@ private slots:
     void handleStopButton();
     void handleUploadButton();
     void handleDisconnectHeadsetButton();
+    void handleSubmitDateTime();
 
 private:
     //variables

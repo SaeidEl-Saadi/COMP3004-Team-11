@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pause, &QAbstractButton::released, this, &MainWindow::handlePauseButton);
     connect(ui->stop, &QAbstractButton::released, this, &MainWindow::handleStopButton);
     connect(ui->dcHeadset, &QAbstractButton::released, this, &MainWindow::handleDisconnectHeadsetButton);
+    connect(ui->setDateTime, &QAbstractButton::released, this, &MainWindow::handleSubmitDateTime);
 
 }
 
@@ -124,6 +125,7 @@ void MainWindow::handleNewSessionButton() {
     ui->upload->setDisabled(true);
     ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
     //CALL NEW SESSION WITHIN DEVICE
+    //start timer
 }
 
 void MainWindow::handleSessionHistoryButton() {
@@ -156,6 +158,12 @@ void MainWindow::handleUploadButton() {
 
 void MainWindow::handleDisconnectHeadsetButton() {
 
+}
+
+void MainWindow::handleSubmitDateTime() {
+    QDateTime datetime = ui->DateTime->dateTime();
+    device->setDateTime(datetime);
+    qDebug() << device->getDateTime();
 }
 
 

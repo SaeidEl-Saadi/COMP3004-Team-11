@@ -22,7 +22,7 @@ class Device : public QObject {
         QVector<Session*> sessions; 
         QDateTime datetime; // current date and time by the user
         QDateTime actualTimeSet; // real current system time when the device is set
-        // MainWindow* mainWindow;
+        MainWindow* mainWindow;
         ProcessSignal* processSignal; // algo for signal processing
         int duration; // just in case we need it
         int sampleRate; // just in case we need it
@@ -36,10 +36,13 @@ class Device : public QObject {
         QVector<Site*> getSites() { return sites; }
         QVector<Session*> getSessions() { return sessions; }
         QDateTime getCurrentDateTime();
+        QDateTime getDateTime() { return datetime; }
         void setDateTime(QDateTime datetime) { this->datetime = datetime; }
 
         void startNewSession();
-    
+
+    private:
+        void printToGUI(QString message);
 
 };
 

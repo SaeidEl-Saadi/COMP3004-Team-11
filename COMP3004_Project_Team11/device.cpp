@@ -23,6 +23,9 @@ Device::Device(int sampleRate, int duration, MainWindow* ui, QObject *parent) : 
         Site* site = new Site(generatorBeta);
         sites.push_back(site);
     }
+
+    // set the main window
+    mainWindow = ui;
 }
 
 QDateTime Device::getCurrentDateTime(){
