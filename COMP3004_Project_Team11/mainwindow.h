@@ -40,6 +40,8 @@ private slots:
     void handleUploadButton();
     void handleDisconnectHeadsetButton();
     void handleSubmitDateTime();
+    void handleReconnectButton();
+    void handleCountDown();
 
 private:
     //variables
@@ -47,6 +49,7 @@ private:
     QTimer *timer;
     QTimer *greenTimer;
     QTimer *redTimer;
+    QTimer *countDown;
     int battery = 100;
     std::vector<QWidget*> menus;
     bool isPowerOff = false;
@@ -56,6 +59,7 @@ private:
     bool stopped = false;
     bool paused = false;
     bool redOn = false;
+    bool sessionRunning = false;
 
     //functions
     void hideMenus();

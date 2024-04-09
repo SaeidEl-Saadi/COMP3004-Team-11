@@ -24,6 +24,11 @@ MainWindow::MainWindow(QWidget *parent)
     redTimer = new QTimer(this);
     QObject::connect(redTimer, &QTimer::timeout, this, &MainWindow::redLightBlink);
 
+    //setup countdown timer
+    countDown = new QTimer(this);
+    countDown->setSingleShot(true);
+    QObject::connect(countDown, &QTimer::timeout, this, &MainWindow::handleCountDown);
+
     //setup menus
     menus.push_back(ui->mainMenu);
     menus.push_back(ui->sessionMenu);
@@ -46,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->stop, &QAbstractButton::released, this, &MainWindow::handleStopButton);
     connect(ui->dcHeadset, &QAbstractButton::released, this, &MainWindow::handleDisconnectHeadsetButton);
     connect(ui->setDateTime, &QAbstractButton::released, this, &MainWindow::handleSubmitDateTime);
+    connect(ui->reconnect, &QAbstractButton::released, this, &MainWindow::handleReconnectButton);
+
+    //other stuff
+    ui->reconnect->hide();
 
 }
 
@@ -54,6 +63,8 @@ MainWindow::~MainWindow()
     delete ui;
     delete timer;
     delete greenTimer;
+    delete redTimer;
+    delete device;
 }
 
 //functions
@@ -108,6 +119,8 @@ bool MainWindow::sessionChecks() {
 void MainWindow::handlePowerButton() {
     if (!isPowerOff) {
         isPowerOff = true;
+        sessionRunning = false;
+        ui->reconnect->hide();
         ui->menu->setDisabled(true);
         ui->offScreen->show();
         ui->play->setDisabled(true);
@@ -165,6 +178,7 @@ void MainWindow::handleLowBatteryButton() {
 }
 
 void MainWindow::handleNewSessionButton() {
+    sessionRunning = true;
     hideMenus();
     menus[1]->show();
     ui->menu->setDisabled(true);
@@ -191,16 +205,20 @@ void MainWindow::handleNewSessionButton() {
         delay();
 
         check = sessionChecks();
-        if (check) return;
-
+        if (check) {
+            sessionRunning = false;
+            return;
+        }
         if (paused) {
             ui->eventLog->append("> Session paused");
+            sessionRunning = false;
             while (paused) {
                 delay();
                 check = sessionChecks();
                 if (check) return;
             }
             ui->eventLog->append("> Session resumed");
+            sessionRunning = true;
         }
     }
 
@@ -239,10 +257,13 @@ void MainWindow::handleUploadButton() {
 }
 
 void MainWindow::handleDisconnectHeadsetButton() {
+    if (!sessionRunning) return;
+    ui->reconnect->show();
     paused = true;
     ui->eventLog->append("> WARNING: EEG Headset disconnected. Awaiting reconnection.");
     turnOffLights();
     redTimer->start(500);
+    countDown->start(10000);
     ui->pause->setDisabled(true);
     ui->play->setDisabled(true);
     ui->stop->setDisabled(true);
@@ -254,6 +275,22 @@ void MainWindow::handleSubmitDateTime() {
     qDebug() << device->getDateTime();
 }
 
+void MainWindow::handleReconnectButton() {
+    ui->reconnect->hide();
+    paused = false;
+    ui->eventLog->append("> Headset reconnected. Resuming session");
+    redTimer->stop();
+    ui->pause->setDisabled(false);
+    ui->play->setDisabled(false);
+    ui->stop->setDisabled(false);
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    ui->redLight->setStyleSheet("background-color: rgba(255, 0, 0, 0.2);");
+}
+
+void MainWindow::handleCountDown() {
+    if (isPowerOff) return;
+    ui->power->click();
+}
 
 void MainWindow::batteryDecrease() {
     battery--;
