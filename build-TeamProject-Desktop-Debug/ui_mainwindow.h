@@ -200,6 +200,7 @@ public:
         sessionLogs->setStyleSheet(QString::fromUtf8("font: 10pt \"DejaVu Sans Mono\";"));
         sessionLogs->setFrameShape(QFrame::Box);
         sessionLogs->setFrameShadow(QFrame::Plain);
+        sessionLogs->setReadOnly(true);
         setDateTimeMenu = new QWidget(widget);
         setDateTimeMenu->setObjectName(QString::fromUtf8("setDateTimeMenu"));
         setDateTimeMenu->setGeometry(QRect(180, 170, 251, 241));
@@ -226,7 +227,7 @@ public:
         eventLog->setFrameShape(QFrame::Box);
         eventLog->setFrameShadow(QFrame::Plain);
         eventLog->setLineWidth(1);
-        eventLog->setReadOnly(false);
+        eventLog->setReadOnly(true);
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(1000, 10, 291, 31));
@@ -243,6 +244,7 @@ public:
         pc->setFrameShape(QFrame::Box);
         pc->setFrameShadow(QFrame::Plain);
         pc->setLineWidth(1);
+        pc->setReadOnly(true);
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 10, 291, 31));

@@ -15,6 +15,15 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(timer, &QTimer::timeout, this, &MainWindow::batteryDecrease);
     timer->start(10000);
 
+    //setup green light timer
+    greenTimer = new QTimer(this);
+    greenTimer->setSingleShot(true);
+    QObject::connect(greenTimer, &QTimer::timeout, this, &MainWindow::greenLightBlink);
+
+    //setup red light timer
+    redTimer = new QTimer(this);
+    QObject::connect(redTimer, &QTimer::timeout, this, &MainWindow::redLightBlink);
+
     //setup menus
     menus.push_back(ui->mainMenu);
     menus.push_back(ui->sessionMenu);
@@ -44,6 +53,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete timer;
+    delete greenTimer;
 }
 
 //functions
@@ -61,6 +71,39 @@ void MainWindow::turnOffLights() {
     ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 0.2);");
 }
 
+void MainWindow::print(QString str) {
+    ui->eventLog->append("> " + str);
+    delay();
+}
+
+void MainWindow::delay(int time) {
+    QTimer timer;
+    QEventLoop loop;
+    QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+    timer.start(time);
+    loop.exec();
+}
+
+void MainWindow::sessionTimerDecrease() {
+    if (sessionTime > 10) {
+        ui->sessionTimer->setText("0:" + QString::fromStdString(std::to_string(--sessionTime)));
+    } else {
+        ui->sessionTimer->setText("0:0" + QString::fromStdString(std::to_string(--sessionTime)));
+    }
+    ui->progressBar->setValue(ui->progressBar->value() + 5);
+}
+
+bool MainWindow::sessionChecks() {
+    if (stopped || isPowerOff) {
+        ui->progressBar->setValue(0);
+        ui->sessionTimer->setText("0:00");
+        stopped = false;
+        ui->eventLog->append("> Session stopping...");
+        return true;
+    }
+    return false;
+}
+
 //slots
 void MainWindow::handlePowerButton() {
     if (!isPowerOff) {
@@ -72,7 +115,12 @@ void MainWindow::handlePowerButton() {
         ui->stop->setDisabled(true);
         ui->upload->setDisabled(true);
         turnOffLights();
+        ui->progressBar->setValue(0);
+        stopped = false;
+        paused = false;
+        ui->sessionTimer->setText("0:00");
         timer->stop();
+        redTimer->stop();
     } else {
         isPowerOff = false;
         ui->menu->setDisabled(false);
@@ -105,6 +153,7 @@ void MainWindow::handleChargeDeviceButton() {
     if (!isPowerOff) {
         timer->start(10000);
     }
+    ui->eventLog->append("> Battery Charged");
 }
 
 void MainWindow::handleLowBatteryButton() {
@@ -119,13 +168,45 @@ void MainWindow::handleNewSessionButton() {
     hideMenus();
     menus[1]->show();
     ui->menu->setDisabled(true);
+    ui->upload->setDisabled(true);
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+
+    //SESSION STARTS HERE
+    stopped = false;
+    paused = false;
+    print("Average baseline frequences calculated");
+    ui->sessionTimer->setText("0:21");
+    sessionTime = 21;
+    print("Administering treatment...");
     ui->pause->setDisabled(false);
     ui->play->setDisabled(false);
     ui->stop->setDisabled(false);
-    ui->upload->setDisabled(true);
-    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
-    //CALL NEW SESSION WITHIN DEVICE
-    //start timer
+    bool check;
+
+    for (int i = 0; i < 21; i++) {
+        sessionTimerDecrease();
+
+        ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
+        greenTimer->start(100);
+        delay();
+
+        check = sessionChecks();
+        if (check) return;
+
+        if (paused) {
+            ui->eventLog->append("> Session paused");
+            while (paused) {
+                delay();
+                check = sessionChecks();
+                if (check) return;
+            }
+            ui->eventLog->append("> Session resumed");
+        }
+    }
+
+    //SESSION OVER RETURN EVERYTHING BACK
+    ui->stop->click();
+    ui->progressBar->setValue(0);
 }
 
 void MainWindow::handleSessionHistoryButton() {
@@ -139,16 +220,17 @@ void MainWindow::handleDateTimeButton() {
 }
 
 void MainWindow::handlePauseButton() {
-
+    paused = true;
 }
 
 void MainWindow::handlePlayButton() {
-
+    paused = false;
 }
 
 void MainWindow::handleStopButton() {
     //RESET SESSION HUD TIMER AND PROGRESS BAR
     ui->menu->setDisabled(false);
+    stopped = true;
     handleMenuButton();
 }
 
@@ -157,7 +239,13 @@ void MainWindow::handleUploadButton() {
 }
 
 void MainWindow::handleDisconnectHeadsetButton() {
-
+    paused = true;
+    ui->eventLog->append("> WARNING: EEG Headset disconnected. Awaiting reconnection.");
+    turnOffLights();
+    redTimer->start(500);
+    ui->pause->setDisabled(true);
+    ui->play->setDisabled(true);
+    ui->stop->setDisabled(true);
 }
 
 void MainWindow::handleSubmitDateTime() {
@@ -176,11 +264,32 @@ void MainWindow::batteryDecrease() {
     } else if (battery <= 10) {
         ui->battery->setTextColor("red");
         ui->batteryLabel->setStyleSheet("font: 10pt DejaVu Sans Mono;\ncolor: red;");
+        if (batteryMessage == false) {
+            ui->eventLog->append("> WARNING: Battery levels low. Please charge the device.");
+            batteryMessage = true;
+        }
     } else {
         ui->battery->setTextColor("black");
         ui->batteryLabel->setStyleSheet("font: 10pt DejaVu Sans Mono;\ncolor: black;");
+        batteryMessage = false;
     }
     ui->battery->clear();
     ui->battery->append(QString::fromStdString(std::to_string(battery) + "%"));
+}
+
+
+void MainWindow::greenLightBlink() {
+    ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 0.2);");
+    greenTimer->stop();
+}
+
+void MainWindow::redLightBlink() {
+    if (!redOn) {
+        redOn = true;
+        ui->redLight->setStyleSheet("background-color: rgba(255, 0, 0, 1);");
+    } else {
+        ui->redLight->setStyleSheet("background-color: rgba(255, 0, 0, 0.2);");
+        redOn = false;
+    }
 }
 

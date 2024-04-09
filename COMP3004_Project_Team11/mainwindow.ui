@@ -429,6 +429,9 @@ background-color: rgb(255, 255, 255);</string>
       <property name="frameShadow">
        <enum>QFrame::Plain</enum>
       </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="setDateTimeMenu" native="true">
@@ -512,7 +515,7 @@ background-color: rgb(255, 255, 255);</string>
      <number>1</number>
     </property>
     <property name="readOnly">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -568,6 +571,9 @@ color: rgb(0, 0, 0);</string>
     </property>
     <property name="lineWidth">
      <number>1</number>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">

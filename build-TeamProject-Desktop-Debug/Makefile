@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = TeamProject1.0.0
-DISTDIR = /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/.tmp/TeamProject1.0.0
+DISTDIR = /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/.tmp/TeamProject1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -400,17 +400,17 @@ moc_brainwavegenerator.cpp: ../COMP3004_Project_Team11/brainwavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/brainwavegenerator.h -o moc_brainwavegenerator.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/brainwavegenerator.h -o moc_brainwavegenerator.cpp
 
 moc_mainwindow.cpp: ../COMP3004_Project_Team11/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/mainwindow.h -o moc_mainwindow.cpp
 
 moc_processsignal.cpp: ../COMP3004_Project_Team11/processsignal.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/processsignal.h -o moc_processsignal.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/processsignal.h -o moc_processsignal.cpp
 
 moc_session.cpp: ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
@@ -418,20 +418,20 @@ moc_session.cpp: ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/session.h -o moc_session.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/session.h -o moc_session.cpp
 
 moc_site.cpp: ../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/brainwavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/site.h -o moc_site.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/site.h -o moc_site.cpp
 
 moc_treatment.cpp: ../COMP3004_Project_Team11/treatment.h \
 		../COMP3004_Project_Team11/processsignal.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/treatment.h -o moc_treatment.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/treatment.h -o moc_treatment.cpp
 
 moc_device.cpp: ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
@@ -441,7 +441,7 @@ moc_device.cpp: ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/processsignal.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/device.h -o moc_device.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/student/Desktop/ProjectAgain/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/student/Desktop/ProjectAgain/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/device.h -o moc_device.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -478,7 +478,13 @@ main.o: ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../COMP3004_Project_Team11/main.cpp
 
 mainwindow.o: ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/mainwindow.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../COMP3004_Project_Team11/device.h \
+		../COMP3004_Project_Team11/site.h \
+		../COMP3004_Project_Team11/brainwavegenerator.h \
+		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/session.h \
+		../COMP3004_Project_Team11/processsignal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../COMP3004_Project_Team11/mainwindow.cpp
 
 processsignal.o: ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/processsignal.h
@@ -504,7 +510,8 @@ device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/devic
 		../COMP3004_Project_Team11/brainwavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/processsignal.h
+		../COMP3004_Project_Team11/processsignal.h \
+		../COMP3004_Project_Team11/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device.o ../COMP3004_Project_Team11/device.cpp
 
 moc_brainwavegenerator.o: moc_brainwavegenerator.cpp 
