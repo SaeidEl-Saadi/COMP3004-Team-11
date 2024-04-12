@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QDebug>
 #include <vector>
-#include "brainwavegenerator.h"
+#include "sinewavegenerator.h"
 
 class Site : public QObject
 {
@@ -12,12 +12,13 @@ class Site : public QObject
 
     // attributes
     private:
-        BrainWaveGenerator* generator;
+        SineWaveGenerator* generator;
+        double frequency;
         std::vector<double> currSignal;
 
     // methods
     public:
-        Site(BrainWaveGenerator* generator , QObject *parent = nullptr);
+        Site(SineWaveGenerator* generator, double frequency, QObject *parent = nullptr);
 
         // getters and setters
         void setSignal(std::vector<double> signal) { currSignal = signal; }

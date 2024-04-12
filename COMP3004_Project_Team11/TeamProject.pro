@@ -8,7 +8,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    brainwavegenerator.cpp \
+    sinewavegenerator.cpp \
     main.cpp \
     mainwindow.cpp \
     processsignal.cpp \
@@ -18,7 +18,7 @@ SOURCES += \
     device.cpp 
 
 HEADERS += \
-    brainwavegenerator.h \
+    sinewavegenerator.h \
     mainwindow.h \
     processsignal.h \
     session.h \

@@ -53,6 +53,7 @@ public:
     QDateTimeEdit *DateTime;
     QPushButton *setDateTime;
     QWidget *offScreen;
+    QPushButton *reconnect;
     QTextEdit *eventLog;
     QLabel *label;
     QLabel *label_2;
@@ -200,6 +201,7 @@ public:
         sessionLogs->setStyleSheet(QString::fromUtf8("font: 10pt \"DejaVu Sans Mono\";"));
         sessionLogs->setFrameShape(QFrame::Box);
         sessionLogs->setFrameShadow(QFrame::Plain);
+        sessionLogs->setReadOnly(true);
         setDateTimeMenu = new QWidget(widget);
         setDateTimeMenu->setObjectName(QString::fromUtf8("setDateTimeMenu"));
         setDateTimeMenu->setGeometry(QRect(180, 170, 251, 241));
@@ -219,6 +221,11 @@ public:
         offScreen->setGeometry(QRect(180, 170, 251, 241));
         offScreen->setStyleSheet(QString::fromUtf8("background-color: rgb(246, 245, 244);\n"
 ""));
+        reconnect = new QPushButton(widget);
+        reconnect->setObjectName(QString::fromUtf8("reconnect"));
+        reconnect->setGeometry(QRect(250, 520, 111, 51));
+        reconnect->setStyleSheet(QString::fromUtf8("font: 10pt \"DejaVu Sans Mono\";\n"
+"background-color: rgb(255, 255, 255);"));
         eventLog = new QTextEdit(centralwidget);
         eventLog->setObjectName(QString::fromUtf8("eventLog"));
         eventLog->setGeometry(QRect(1000, 50, 291, 691));
@@ -226,7 +233,7 @@ public:
         eventLog->setFrameShape(QFrame::Box);
         eventLog->setFrameShadow(QFrame::Plain);
         eventLog->setLineWidth(1);
-        eventLog->setReadOnly(false);
+        eventLog->setReadOnly(true);
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(1000, 10, 291, 31));
@@ -243,6 +250,7 @@ public:
         pc->setFrameShape(QFrame::Box);
         pc->setFrameShadow(QFrame::Plain);
         pc->setLineWidth(1);
+        pc->setReadOnly(true);
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 10, 291, 31));
@@ -312,6 +320,8 @@ public:
         upload->setText(QCoreApplication::translate("MainWindow", "Upload", nullptr));
         sessionTimer->setText(QCoreApplication::translate("MainWindow", "0:00", nullptr));
         setDateTime->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
+        reconnect->setText(QCoreApplication::translate("MainWindow", "Reconnect and\n"
+"Continue", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Event Log", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Reset Neurofeedback", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "PC", nullptr));

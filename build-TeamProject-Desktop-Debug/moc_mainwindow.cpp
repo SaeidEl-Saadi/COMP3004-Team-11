@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[16];
-    char stringdata0[304];
+    QByteArrayData data[20];
+    char stringdata0[372];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,32 +33,37 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 15), // "batteryDecrease"
+QT_MOC_LITERAL(1, 11, 15), // "greenLightBlink"
 QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 17), // "handlePowerButton"
-QT_MOC_LITERAL(4, 46, 16), // "handleMenuButton"
-QT_MOC_LITERAL(5, 63, 24), // "handleChargeDeviceButton"
-QT_MOC_LITERAL(6, 88, 22), // "handleLowBatteryButton"
-QT_MOC_LITERAL(7, 111, 22), // "handleNewSessionButton"
-QT_MOC_LITERAL(8, 134, 26), // "handleSessionHistoryButton"
-QT_MOC_LITERAL(9, 161, 20), // "handleDateTimeButton"
-QT_MOC_LITERAL(10, 182, 17), // "handlePauseButton"
-QT_MOC_LITERAL(11, 200, 16), // "handlePlayButton"
-QT_MOC_LITERAL(12, 217, 16), // "handleStopButton"
-QT_MOC_LITERAL(13, 234, 18), // "handleUploadButton"
-QT_MOC_LITERAL(14, 253, 29), // "handleDisconnectHeadsetButton"
-QT_MOC_LITERAL(15, 283, 20) // "handleSubmitDateTime"
+QT_MOC_LITERAL(3, 28, 13), // "redLightBlink"
+QT_MOC_LITERAL(4, 42, 15), // "batteryDecrease"
+QT_MOC_LITERAL(5, 58, 17), // "handlePowerButton"
+QT_MOC_LITERAL(6, 76, 16), // "handleMenuButton"
+QT_MOC_LITERAL(7, 93, 24), // "handleChargeDeviceButton"
+QT_MOC_LITERAL(8, 118, 22), // "handleLowBatteryButton"
+QT_MOC_LITERAL(9, 141, 22), // "handleNewSessionButton"
+QT_MOC_LITERAL(10, 164, 26), // "handleSessionHistoryButton"
+QT_MOC_LITERAL(11, 191, 20), // "handleDateTimeButton"
+QT_MOC_LITERAL(12, 212, 17), // "handlePauseButton"
+QT_MOC_LITERAL(13, 230, 16), // "handlePlayButton"
+QT_MOC_LITERAL(14, 247, 16), // "handleStopButton"
+QT_MOC_LITERAL(15, 264, 18), // "handleUploadButton"
+QT_MOC_LITERAL(16, 283, 29), // "handleDisconnectHeadsetButton"
+QT_MOC_LITERAL(17, 313, 20), // "handleSubmitDateTime"
+QT_MOC_LITERAL(18, 334, 21), // "handleReconnectButton"
+QT_MOC_LITERAL(19, 356, 15) // "handleCountDown"
 
     },
-    "MainWindow\0batteryDecrease\0\0"
-    "handlePowerButton\0handleMenuButton\0"
-    "handleChargeDeviceButton\0"
+    "MainWindow\0greenLightBlink\0\0redLightBlink\0"
+    "batteryDecrease\0handlePowerButton\0"
+    "handleMenuButton\0handleChargeDeviceButton\0"
     "handleLowBatteryButton\0handleNewSessionButton\0"
     "handleSessionHistoryButton\0"
     "handleDateTimeButton\0handlePauseButton\0"
     "handlePlayButton\0handleStopButton\0"
     "handleUploadButton\0handleDisconnectHeadsetButton\0"
-    "handleSubmitDateTime"
+    "handleSubmitDateTime\0handleReconnectButton\0"
+    "handleCountDown"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +73,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -76,22 +81,30 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x08 /* Private */,
-       3,    0,   85,    2, 0x08 /* Private */,
-       4,    0,   86,    2, 0x08 /* Private */,
-       5,    0,   87,    2, 0x08 /* Private */,
-       6,    0,   88,    2, 0x08 /* Private */,
-       7,    0,   89,    2, 0x08 /* Private */,
-       8,    0,   90,    2, 0x08 /* Private */,
-       9,    0,   91,    2, 0x08 /* Private */,
-      10,    0,   92,    2, 0x08 /* Private */,
-      11,    0,   93,    2, 0x08 /* Private */,
-      12,    0,   94,    2, 0x08 /* Private */,
-      13,    0,   95,    2, 0x08 /* Private */,
-      14,    0,   96,    2, 0x08 /* Private */,
-      15,    0,   97,    2, 0x08 /* Private */,
+       1,    0,  104,    2, 0x08 /* Private */,
+       3,    0,  105,    2, 0x08 /* Private */,
+       4,    0,  106,    2, 0x08 /* Private */,
+       5,    0,  107,    2, 0x08 /* Private */,
+       6,    0,  108,    2, 0x08 /* Private */,
+       7,    0,  109,    2, 0x08 /* Private */,
+       8,    0,  110,    2, 0x08 /* Private */,
+       9,    0,  111,    2, 0x08 /* Private */,
+      10,    0,  112,    2, 0x08 /* Private */,
+      11,    0,  113,    2, 0x08 /* Private */,
+      12,    0,  114,    2, 0x08 /* Private */,
+      13,    0,  115,    2, 0x08 /* Private */,
+      14,    0,  116,    2, 0x08 /* Private */,
+      15,    0,  117,    2, 0x08 /* Private */,
+      16,    0,  118,    2, 0x08 /* Private */,
+      17,    0,  119,    2, 0x08 /* Private */,
+      18,    0,  120,    2, 0x08 /* Private */,
+      19,    0,  121,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -116,20 +129,24 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->batteryDecrease(); break;
-        case 1: _t->handlePowerButton(); break;
-        case 2: _t->handleMenuButton(); break;
-        case 3: _t->handleChargeDeviceButton(); break;
-        case 4: _t->handleLowBatteryButton(); break;
-        case 5: _t->handleNewSessionButton(); break;
-        case 6: _t->handleSessionHistoryButton(); break;
-        case 7: _t->handleDateTimeButton(); break;
-        case 8: _t->handlePauseButton(); break;
-        case 9: _t->handlePlayButton(); break;
-        case 10: _t->handleStopButton(); break;
-        case 11: _t->handleUploadButton(); break;
-        case 12: _t->handleDisconnectHeadsetButton(); break;
-        case 13: _t->handleSubmitDateTime(); break;
+        case 0: _t->greenLightBlink(); break;
+        case 1: _t->redLightBlink(); break;
+        case 2: _t->batteryDecrease(); break;
+        case 3: _t->handlePowerButton(); break;
+        case 4: _t->handleMenuButton(); break;
+        case 5: _t->handleChargeDeviceButton(); break;
+        case 6: _t->handleLowBatteryButton(); break;
+        case 7: _t->handleNewSessionButton(); break;
+        case 8: _t->handleSessionHistoryButton(); break;
+        case 9: _t->handleDateTimeButton(); break;
+        case 10: _t->handlePauseButton(); break;
+        case 11: _t->handlePlayButton(); break;
+        case 12: _t->handleStopButton(); break;
+        case 13: _t->handleUploadButton(); break;
+        case 14: _t->handleDisconnectHeadsetButton(); break;
+        case 15: _t->handleSubmitDateTime(); break;
+        case 16: _t->handleReconnectButton(); break;
+        case 17: _t->handleCountDown(); break;
         default: ;
         }
     }
@@ -165,13 +182,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 18;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 18)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 18;
     }
     return _id;
 }

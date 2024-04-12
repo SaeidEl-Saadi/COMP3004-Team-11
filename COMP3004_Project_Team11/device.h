@@ -7,7 +7,7 @@
 #include <QDebug>
 #include "site.h"
 #include "session.h"
-#include "brainwavegenerator.h"
+#include "sinewavegenerator.h"
 #include "processsignal.h"
 //#include "mainwindow.h"
 
@@ -24,8 +24,6 @@ class Device : public QObject {
         QDateTime actualTimeSet; // real current system time when the device is set
         MainWindow* mainWindow;
         ProcessSignal* processSignal; // algo for signal processing
-        int duration; // just in case we need it
-        int sampleRate; // just in case we need it
 
     // methods
     public:
@@ -37,9 +35,9 @@ class Device : public QObject {
         QVector<Session*> getSessions() { return sessions; }
         QDateTime getCurrentDateTime();
         QDateTime getDateTime() { return datetime; }
-        void setDateTime(QDateTime datetime) { this->datetime = datetime; }
+        void setDateTime(QDateTime datetime);
 
-        void startNewSession();
+        bool startNewSession();
 
     private:
         void printToGUI(QString message);

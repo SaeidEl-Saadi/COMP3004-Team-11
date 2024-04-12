@@ -52,21 +52,20 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../COMP3004_Project_Team11/brainwavegenerator.cpp \
+SOURCES       = ../COMP3004_Project_Team11/sinewavegenerator.cpp \
 		../COMP3004_Project_Team11/main.cpp \
 		../COMP3004_Project_Team11/mainwindow.cpp \
 		../COMP3004_Project_Team11/processsignal.cpp \
 		../COMP3004_Project_Team11/session.cpp \
 		../COMP3004_Project_Team11/site.cpp \
 		../COMP3004_Project_Team11/treatment.cpp \
-		../COMP3004_Project_Team11/device.cpp moc_brainwavegenerator.cpp \
-		moc_mainwindow.cpp \
+		../COMP3004_Project_Team11/device.cpp moc_mainwindow.cpp \
 		moc_processsignal.cpp \
 		moc_session.cpp \
 		moc_site.cpp \
 		moc_treatment.cpp \
 		moc_device.cpp
-OBJECTS       = brainwavegenerator.o \
+OBJECTS       = sinewavegenerator.o \
 		main.o \
 		mainwindow.o \
 		processsignal.o \
@@ -74,7 +73,6 @@ OBJECTS       = brainwavegenerator.o \
 		site.o \
 		treatment.o \
 		device.o \
-		moc_brainwavegenerator.o \
 		moc_mainwindow.o \
 		moc_processsignal.o \
 		moc_session.o \
@@ -159,14 +157,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../COMP3004_Project_Team11/TeamProject.pro ../COMP3004_Project_Team11/brainwavegenerator.h \
+		../COMP3004_Project_Team11/TeamProject.pro ../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/mainwindow.h \
 		../COMP3004_Project_Team11/processsignal.h \
 		../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/treatment.h \
 		../COMP3004_Project_Team11/brainregion.h \
-		../COMP3004_Project_Team11/device.h ../COMP3004_Project_Team11/brainwavegenerator.cpp \
+		../COMP3004_Project_Team11/device.h ../COMP3004_Project_Team11/sinewavegenerator.cpp \
 		../COMP3004_Project_Team11/main.cpp \
 		../COMP3004_Project_Team11/mainwindow.cpp \
 		../COMP3004_Project_Team11/processsignal.cpp \
@@ -359,8 +357,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../COMP3004_Project_Team11/brainwavegenerator.h ../COMP3004_Project_Team11/mainwindow.h ../COMP3004_Project_Team11/processsignal.h ../COMP3004_Project_Team11/session.h ../COMP3004_Project_Team11/site.h ../COMP3004_Project_Team11/treatment.h ../COMP3004_Project_Team11/brainregion.h ../COMP3004_Project_Team11/device.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../COMP3004_Project_Team11/brainwavegenerator.cpp ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11/device.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../COMP3004_Project_Team11/sinewavegenerator.h ../COMP3004_Project_Team11/mainwindow.h ../COMP3004_Project_Team11/processsignal.h ../COMP3004_Project_Team11/session.h ../COMP3004_Project_Team11/site.h ../COMP3004_Project_Team11/treatment.h ../COMP3004_Project_Team11/brainregion.h ../COMP3004_Project_Team11/device.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../COMP3004_Project_Team11/sinewavegenerator.cpp ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11/device.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../COMP3004_Project_Team11/mainwindow.ui $(DISTDIR)/
 
 
@@ -393,15 +391,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_brainwavegenerator.cpp moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_brainwavegenerator.cpp moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
-moc_brainwavegenerator.cpp: ../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/brainwavegenerator.h -o moc_brainwavegenerator.cpp
-
+	-$(DEL_FILE) moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
 moc_mainwindow.cpp: ../COMP3004_Project_Team11/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -414,15 +406,14 @@ moc_processsignal.cpp: ../COMP3004_Project_Team11/processsignal.h \
 
 moc_session.cpp: ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/session.h -o moc_session.cpp
 
 moc_site.cpp: ../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/site.h -o moc_site.cpp
@@ -435,9 +426,9 @@ moc_treatment.cpp: ../COMP3004_Project_Team11/treatment.h \
 
 moc_device.cpp: ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/session.h \
+		../COMP3004_Project_Team11/brainregion.h \
 		../COMP3004_Project_Team11/processsignal.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -464,21 +455,26 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-brainwavegenerator.o: ../COMP3004_Project_Team11/brainwavegenerator.cpp ../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brainwavegenerator.o ../COMP3004_Project_Team11/brainwavegenerator.cpp
+sinewavegenerator.o: ../COMP3004_Project_Team11/sinewavegenerator.cpp ../COMP3004_Project_Team11/sinewavegenerator.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sinewavegenerator.o ../COMP3004_Project_Team11/sinewavegenerator.cpp
 
 main.o: ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.h \
 		../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h \
 		../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/processsignal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../COMP3004_Project_Team11/main.cpp
 
 mainwindow.o: ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/mainwindow.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../COMP3004_Project_Team11/device.h \
+		../COMP3004_Project_Team11/site.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
+		../COMP3004_Project_Team11/session.h \
+		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/processsignal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../COMP3004_Project_Team11/mainwindow.cpp
 
 processsignal.o: ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/processsignal.h
@@ -486,13 +482,12 @@ processsignal.o: ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Projec
 
 session.o: ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/brainregion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o session.o ../COMP3004_Project_Team11/session.cpp
 
 site.o: ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h
+		../COMP3004_Project_Team11/sinewavegenerator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o site.o ../COMP3004_Project_Team11/site.cpp
 
 treatment.o: ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11/treatment.h \
@@ -501,14 +496,12 @@ treatment.o: ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11
 
 device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/brainwavegenerator.h \
-		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/sinewavegenerator.h \
 		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/processsignal.h
+		../COMP3004_Project_Team11/brainregion.h \
+		../COMP3004_Project_Team11/processsignal.h \
+		../COMP3004_Project_Team11/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device.o ../COMP3004_Project_Team11/device.cpp
-
-moc_brainwavegenerator.o: moc_brainwavegenerator.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_brainwavegenerator.o moc_brainwavegenerator.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
