@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QObject>
 #include <QDateTime>
+#include <QtCharts>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +23,9 @@ public:
 
     //functions
     void print(QString str);
+
+    //chart function
+    void displayChart(QtCharts::QLineSeries *series);
 
 private slots:
     void greenLightBlink();
@@ -67,5 +71,6 @@ private:
     void delay(int time = 1000);
     void sessionTimerDecrease();
     bool sessionChecks();
+
 };
 #endif // MAINWINDOW_H

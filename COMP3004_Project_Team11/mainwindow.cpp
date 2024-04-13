@@ -2,12 +2,14 @@
 #include "ui_mainwindow.h"
 #include "device.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     //instantiate device
-    device = new Device(10, 3, this);
+    device = new Device(7, this);
 
     //setup battery timer
     ui->setupUi(this);
@@ -180,8 +182,16 @@ void MainWindow::handleLowBatteryButton() {
 void MainWindow::handleNewSessionButton() {
     // BACK END
     if(!device->startNewSession())
-        return;
+        return; 
 
+    QLineSeries* series;
+    for (int i = 0; i < 4; i++){
+        series = device->getSessions().back()->getRoundSignals().at(i).at(0);
+        qDebug() << "Series: " << series;
+        displayChart(series);
+        delay(3000);
+    }
+/*
     //FRONT END
     sessionRunning = true;
     hideMenus();
@@ -230,6 +240,7 @@ void MainWindow::handleNewSessionButton() {
     //SESSION OVER RETURN EVERYTHING BACK
     ui->stop->click();
     ui->progressBar->setValue(0);
+    */
 }
 
 void MainWindow::handleSessionHistoryButton() {
@@ -335,3 +346,21 @@ void MainWindow::redLightBlink() {
     }
 }
 
+void MainWindow::displayChart(QtCharts::QLineSeries *series) {
+    // Check if sinewaves QGraphicsView has already been promoted to QChartView in Qt Designer
+    auto *chartView = dynamic_cast<QtCharts::QChartView*>(ui->sinewaves);
+    if (!chartView) {
+        qWarning() << "sinewaves is not a QChartView. Please promote it in Qt Designer.";
+        return;
+    }
+
+    // Create a new chart
+    QtCharts::QChart *chart = new QtCharts::QChart();
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes(); // This will create axes that automatically scale to the series
+
+    // Set the chart in the QChartView
+    chartView->setChart(chart);
+    chartView->setRenderHint(QPainter::Antialiasing); // For smoother lines
+}

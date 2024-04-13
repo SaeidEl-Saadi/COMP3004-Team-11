@@ -21,6 +21,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
+#include "QtCharts/QChartView"
 
 QT_BEGIN_NAMESPACE
 
@@ -64,6 +65,7 @@ public:
     QPushButton *dcHeadset;
     QPushButton *chargeDevice;
     QLabel *label_4;
+    QChartView *sinewaves;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -77,7 +79,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         widget = new QWidget(centralwidget);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(350, 90, 631, 591));
+        widget->setGeometry(QRect(350, 50, 631, 581));
         widget->setStyleSheet(QString::fromUtf8("background-color: rgb(192, 191, 188);"));
         mainMenu = new QWidget(widget);
         mainMenu->setObjectName(QString::fromUtf8("mainMenu"));
@@ -228,7 +230,7 @@ public:
 "background-color: rgb(255, 255, 255);"));
         eventLog = new QTextEdit(centralwidget);
         eventLog->setObjectName(QString::fromUtf8("eventLog"));
-        eventLog->setGeometry(QRect(1000, 50, 291, 691));
+        eventLog->setGeometry(QRect(1000, 50, 291, 431));
         eventLog->setStyleSheet(QString::fromUtf8("font: 12pt \"DejaVu Sans Mono\";"));
         eventLog->setFrameShape(QFrame::Box);
         eventLog->setFrameShadow(QFrame::Plain);
@@ -241,7 +243,7 @@ public:
 "color: rgb(0, 0, 0);"));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(360, 40, 481, 41));
+        label_2->setGeometry(QRect(360, 0, 481, 41));
         label_2->setStyleSheet(QString::fromUtf8("font: 20pt \"DejaVu Sans Mono\";"));
         pc = new QTextEdit(centralwidget);
         pc->setObjectName(QString::fromUtf8("pc"));
@@ -282,6 +284,9 @@ public:
         label_4->setGeometry(QRect(10, 530, 291, 31));
         label_4->setStyleSheet(QString::fromUtf8("font: 20pt \"DejaVu Sans Mono\";\n"
 "color: rgb(0, 0, 0);"));
+        sinewaves = new QChartView(centralwidget);
+        sinewaves->setObjectName(QString::fromUtf8("sinewaves"));
+        sinewaves->setGeometry(QRect(1000, 500, 291, 191));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));

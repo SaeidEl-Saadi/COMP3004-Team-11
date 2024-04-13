@@ -14,23 +14,35 @@ class Session : QObject {
     // attributes
     private:
         QDateTime datetime;
-        std::vector<double> avgBefore;
-        std::vector<double> avgAfter;
+
+        double avgBefore;
+        double avgAfter;
+
+        // first lvl is round, 2nd lvl signals of all 7 sites
+        QVector<QVector<QLineSeries*>> roundSignals;  
+
+        // [round 1] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
+        // [round 2] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
+        // ....
+        // [round 4] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
 
     // methods
     public:
         // constructor
-        Session(QDateTime datetime, QObject *parent = nullptr);
+        Session(int numSites, QDateTime datetime, QObject *parent = nullptr);
 
         //setters and getters
         void setDate(QDateTime datetime) { this->datetime = datetime; }
         QDateTime getDateTime() { return datetime; }
 
-        std::vector<double> getAvgBefore() { return avgBefore; }
-        void setAvgBefore(std::vector<double> avgBefore) { this->avgBefore = avgBefore; }
+        double getAvgBefore() { return avgBefore; }
+        void setAvgBefore(double avgBefore) { this->avgBefore = avgBefore; }
         
-        std::vector<double> getAvgAfter() { return avgAfter; }
-        void setAvgAfter(std::vector<double> avgAfter) { this->avgAfter = avgAfter; }
+        double getAvgAfter() { return avgAfter; }
+        void setAvgAfter(double avgAfter) { this->avgAfter = avgAfter; }
+
+        QVector<QVector<QLineSeries*>> getRoundSignals() { return roundSignals; }
+        void setRoundSignal(int round, int site, QLineSeries* signal) { roundSignals[round][site] = signal; }
 
 };
 

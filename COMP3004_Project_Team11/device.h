@@ -7,8 +7,8 @@
 #include <QDebug>
 #include "site.h"
 #include "session.h"
-#include "sinewavegenerator.h"
-#include "processsignal.h"
+#include "signalgenprocess.h"
+#include "freqband.h"
 //#include "mainwindow.h"
 
 class MainWindow;
@@ -23,12 +23,12 @@ class Device : public QObject {
         QDateTime datetime; // current date and time by the user
         QDateTime actualTimeSet; // real current system time when the device is set
         MainWindow* mainWindow;
-        ProcessSignal* processSignal; // algo for signal processing
+        int numSites;
 
     // methods
     public:
         // constructor
-        Device(int sampleRate, int duration, MainWindow* ui, QObject *parent = nullptr);
+        Device(int numSites, MainWindow* ui, QObject *parent = nullptr);
 
         //setters and getters
         QVector<Site*> getSites() { return sites; }
@@ -38,6 +38,9 @@ class Device : public QObject {
         void setDateTime(QDateTime datetime);
 
         bool startNewSession();
+        double getBaseLine();
+        FreqBand getFreqBand(double fd);
+        void addOffset(FreqBand band, double offset, Site* site);
 
     private:
         void printToGUI(QString message);
