@@ -2,6 +2,7 @@
 #define SIGNALGENPROCESS_H
 
 #include <QtCharts>
+#include <random>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -14,8 +15,8 @@ class SignalGenProcess {
         double calculateDominantFrequency(double f1, double A1, double f2, double A2, double f3, double A3, double f4, double A4);
 
     private:
-        double duration;
-        double sampleRate;
+        int duration;
+        int sampleRate;
 };
 
 #endif // SIGNALGENPROCESS_H

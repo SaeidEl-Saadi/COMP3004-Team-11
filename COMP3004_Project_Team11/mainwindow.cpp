@@ -58,6 +58,13 @@ MainWindow::MainWindow(QWidget *parent)
     //other stuff
     ui->reconnect->hide();
 
+    //setup chart
+    QChart *chart = new QChart();
+    chart->setTitle("I hate these f***ing charts");
+    chart->createDefaultAxes();
+    ui->sinewaves->setChart(chart);
+    ui->sinewaves->setRenderHint(QPainter::Antialiasing);
+
 }
 
 MainWindow::~MainWindow()
@@ -184,63 +191,81 @@ void MainWindow::handleNewSessionButton() {
     if(!device->startNewSession())
         return; 
 
-    QLineSeries* series;
-    for (int i = 0; i < 4; i++){
-        series = device->getSessions().back()->getRoundSignals().at(i).at(0);
-        qDebug() << "Series: " << series;
-        displayChart(series);
-        delay(3000);
-    }
-/*
-    //FRONT END
-    sessionRunning = true;
-    hideMenus();
-    menus[1]->show();
-    ui->menu->setDisabled(true);
-    ui->upload->setDisabled(true);
-    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    // Sessions from Device class: returns QVector<Session*>
+    // Session* sessions = device->getSessions()
 
-    //SESSION STARTS HERE
-    stopped = false;
-    paused = false;
-    print("Average baseline frequences calculated");
-    ui->sessionTimer->setText("0:21");
-    sessionTime = 21;
-    print("Administering treatment...");
-    ui->pause->setDisabled(false);
-    ui->play->setDisabled(false);
-    ui->stop->setDisabled(false);
-    bool check;
+    // roundSignals from Session class: returns QVector<QVector<QLineSeries*>>
+    // QVector<QVector<QLineSeries*>> roundSignals = session->getRoundSignals();
+    // roundSignals structure(always 5 rounds, but variable sites):
+        // [round 1] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal] 
+        // [round 2] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
+        // ....
+        // [round 5] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
 
-    for (int i = 0; i < 21; i++) {
-        sessionTimerDecrease();
+    // delete last session
+    // device->deleteLastSession();
 
-        ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
-        greenTimer->start(100);
-        delay();
+    QVector<Session*> sessions = device->getSessions();
+    QLineSeries *newSeries = sessions[0]->getRoundSignals()[0][0];
+    displayChart(newSeries);
+    delay(1000);
+    newSeries = sessions[0]->getRoundSignals()[1][0];
+    displayChart(newSeries);
+    delay(1000);
+    newSeries = sessions[0]->getRoundSignals()[2][0];
+    displayChart(newSeries);
 
-        check = sessionChecks();
-        if (check) {
-            sessionRunning = false;
-            return;
-        }
-        if (paused) {
-            ui->eventLog->append("> Session paused");
-            sessionRunning = false;
-            while (paused) {
-                delay();
-                check = sessionChecks();
-                if (check) return;
-            }
-            ui->eventLog->append("> Session resumed");
-            sessionRunning = true;
-        }
-    }
+    
 
-    //SESSION OVER RETURN EVERYTHING BACK
-    ui->stop->click();
-    ui->progressBar->setValue(0);
-    */
+    // //FRONT END
+    // sessionRunning = true;
+    // hideMenus();
+    // menus[1]->show();
+    // ui->menu->setDisabled(true);
+    // ui->upload->setDisabled(true);
+    // ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+
+    // //SESSION STARTS HERE
+    // stopped = false;
+    // paused = false;
+    // print("Average baseline frequences calculated");
+    // ui->sessionTimer->setText("0:21");
+    // sessionTime = 21;
+    // print("Administering treatment...");
+    // ui->pause->setDisabled(false);
+    // ui->play->setDisabled(false);
+    // ui->stop->setDisabled(false);
+    // bool check;
+
+    // for (int i = 0; i < 21; i++) {
+    //     sessionTimerDecrease();
+
+    //     ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
+    //     greenTimer->start(100);
+    //     delay();
+
+    //     check = sessionChecks();
+    //     if (check) {
+    //         sessionRunning = false;
+    //         return;
+    //     }
+    //     if (paused) {
+    //         ui->eventLog->append("> Session paused");
+    //         sessionRunning = false;
+    //         while (paused) {
+    //             delay();
+    //             check = sessionChecks();
+    //             if (check) return;
+    //         }
+    //         ui->eventLog->append("> Session resumed");
+    //         sessionRunning = true;
+    //     }
+    // }
+
+    // //SESSION OVER RETURN EVERYTHING BACK
+    // ui->stop->click();
+    // ui->progressBar->setValue(0);
+    
 }
 
 void MainWindow::handleSessionHistoryButton() {
@@ -346,21 +371,19 @@ void MainWindow::redLightBlink() {
     }
 }
 
-void MainWindow::displayChart(QtCharts::QLineSeries *series) {
-    // Check if sinewaves QGraphicsView has already been promoted to QChartView in Qt Designer
-    auto *chartView = dynamic_cast<QtCharts::QChartView*>(ui->sinewaves);
-    if (!chartView) {
-        qWarning() << "sinewaves is not a QChartView. Please promote it in Qt Designer.";
-        return;
+// an example of displayChart function
+void MainWindow::displayChart(QtCharts::QLineSeries *newSeries) {
+    QChart *chart = ui->sinewaves->chart();
+
+    // Remove all series from the chart
+    QList<QAbstractSeries *> oldSeries = chart->series();
+    for (QAbstractSeries *series : oldSeries) {
+        chart->removeSeries(series);
     }
 
-    // Create a new chart
-    QtCharts::QChart *chart = new QtCharts::QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes(); // This will create axes that automatically scale to the series
-
-    // Set the chart in the QChartView
-    chartView->setChart(chart);
-    chartView->setRenderHint(QPainter::Antialiasing); // For smoother lines
+    // Add the new series to the chart
+    chart->addSeries(newSeries);
+    chart->createDefaultAxes(); // Recreate axes to fit the new series
 }
+
+

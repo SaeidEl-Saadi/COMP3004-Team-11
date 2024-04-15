@@ -13,11 +13,11 @@ class Site : public QObject
     // attributes
     private:
         SignalGenProcess* generator;
-        QLineSeries* currSignal;
+        QLineSeries* currSignal = nullptr;
 
-        // frequency bands
+        // frequency bands: alpha [8-12Hz], beta [12-30Hz], delta [1-4Hz], theta [4-8Hz]
         double alphaFreq;
-        double betaFreq; 
+        double betaFreq;
         double deltaFreq;
         double thetaFreq;
 
@@ -29,7 +29,7 @@ class Site : public QObject
 
     // methods
     public:
-        Site(SignalGenProcess* generator, double alphaFreq, double betaFreq, double deltaFreq, double thetaFreq, double alphaAmp, double betaAmp, double deltaAmp, double thetaAmp);
+        Site(SignalGenProcess* generator);
 
         // getters and setters
         void setSignal(QLineSeries* signal) { currSignal = signal; }
@@ -45,9 +45,16 @@ class Site : public QObject
         double getDeltaFreq() { return deltaFreq; }
         double getThetaFreq() { return thetaFreq; }
 
+        double getAlphaAmp() { return alphaAmp; }
+        double getBetaAmp() { return betaAmp; }
+        double getDeltaAmp() { return deltaAmp; }
+        double getThetaAmp() { return thetaAmp; }
+
         
         void readSignal(); 
         double getDominantFrequency();
+        void newAmp();
+        void newFreq();
 
     private:
         void generateSignal();

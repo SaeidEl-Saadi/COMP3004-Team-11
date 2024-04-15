@@ -19,6 +19,7 @@ QLineSeries* SignalGenProcess::generate(double alphaFreq, double alphaAmp, doubl
     return series;
 }
 
+
 double SignalGenProcess::calculateDominantFrequency(double f1, double A1, double f2, double A2, double f3, double A3, double f4, double A4) {
     double numerator = (f1 * pow(A1, 2)) + (f2 * pow(A2, 2)) + (f3 * pow(A3, 2)) + (f4 * pow(A4, 2));
     double denominator = pow(A1, 2) + pow(A2, 2) + pow(A3, 2) + pow(A4, 2);

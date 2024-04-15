@@ -40,8 +40,10 @@ class Device : public QObject {
         bool startNewSession();
         double getBaseLine();
         FreqBand getFreqBand(double fd);
-        void addOffset(FreqBand band, double offset, Site* site);
+        QString getFreqBandString(FreqBand band);
 
+        void addOffset(FreqBand band, double offset, Site* site);
+        void deleteLatestSession();
     private:
         void printToGUI(QString message);
 

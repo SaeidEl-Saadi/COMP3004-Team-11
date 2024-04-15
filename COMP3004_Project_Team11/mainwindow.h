@@ -11,6 +11,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+QT_CHARTS_USE_NAMESPACE
+
 class Device;
 
 class MainWindow : public QMainWindow

@@ -286,7 +286,7 @@ public:
 "color: rgb(0, 0, 0);"));
         sinewaves = new QChartView(centralwidget);
         sinewaves->setObjectName(QString::fromUtf8("sinewaves"));
-        sinewaves->setGeometry(QRect(1000, 500, 291, 191));
+        sinewaves->setGeometry(QRect(990, 500, 321, 201));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));

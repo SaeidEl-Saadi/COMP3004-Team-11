@@ -1,22 +1,37 @@
 #include "site.h"
 
-Site::Site(SignalGenProcess* generator, double alphaFreq, double betaFreq, double deltaFreq, double thetaFreq, double alphaAmp, double betaAmp, double deltaAmp, double thetaAmp){
+Site::Site(SignalGenProcess* generator){
     // generator
     this->generator = generator;
 
-    this->currSignal = nullptr;
-    
-    // frequency bands
-    this->alphaFreq = alphaFreq;
-    this->betaFreq = betaFreq;
-    this->deltaFreq = deltaFreq;
-    this->thetaFreq = thetaFreq;
+    // srand(time(NULL));
+    srand(42);
 
-    // amplitude bands
-    this->alphaAmp = alphaAmp;
-    this->betaAmp = betaAmp;
-    this->deltaAmp = deltaAmp;
-    this->thetaAmp = thetaAmp;
+    // frequency bands: alpha [8-12Hz], beta [12-30Hz], delta [1-4Hz], theta [4-8Hz]
+    alphaFreq = 8.0 + (rand() / (float)RAND_MAX) * 4.0;
+    betaFreq = 12.0 + (rand() / (float)RAND_MAX) * 18.0;
+    deltaFreq = 1.0 + (rand() / (float)RAND_MAX) * 3.0;
+    thetaFreq = 4.0 + (rand() / (float)RAND_MAX) * 4.0;
+
+    // amplitude bands [0.8, 1.2]
+    alphaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    betaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    deltaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    thetaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+}
+
+void Site::newAmp(){
+    alphaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    betaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    deltaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+    thetaAmp = 0.8 + (rand() / (float)RAND_MAX) * 0.4;
+}
+
+void Site::newFreq(){
+    alphaFreq = 8.0 + (rand() / (float)RAND_MAX) * 4.0;
+    betaFreq = 12.0 + (rand() / (float)RAND_MAX) * 18.0;
+    deltaFreq = 1.0 + (rand() / (float)RAND_MAX) * 3.0;
+    thetaFreq = 4.0 + (rand() / (float)RAND_MAX) * 4.0;
 }
 
 // we will simulate a signal being read by generating one
