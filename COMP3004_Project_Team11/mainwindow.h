@@ -28,6 +28,7 @@ public:
 
     //chart function
     void displayChart(QtCharts::QLineSeries *series);
+    void helpDisplayChart(int round, int site);
 
 private slots:
     void greenLightBlink();
@@ -48,6 +49,7 @@ private slots:
     void handleSubmitDateTime();
     void handleReconnectButton();
     void handleCountDown();
+    void handleComboBox(int index);
 
 private:
     //variables
@@ -66,6 +68,8 @@ private:
     bool paused = false;
     bool redOn = false;
     bool sessionRunning = false;
+    int currentRound = 0;
+    bool midSession = false;
 
     //functions
     void hideMenus();

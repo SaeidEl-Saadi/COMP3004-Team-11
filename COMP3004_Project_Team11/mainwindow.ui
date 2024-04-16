@@ -703,10 +703,26 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>990</x>
-      <y>500</y>
-      <width>321</width>
+      <y>540</y>
+      <width>311</width>
       <height>201</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="sites">
+    <property name="geometry">
+     <rect>
+      <x>1000</x>
+      <y>500</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="currentText">
+     <string/>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
     </property>
    </widget>
   </widget>

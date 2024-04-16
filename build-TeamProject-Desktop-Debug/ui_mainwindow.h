@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
@@ -66,6 +67,7 @@ public:
     QPushButton *chargeDevice;
     QLabel *label_4;
     QChartView *sinewaves;
+    QComboBox *sites;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -286,7 +288,10 @@ public:
 "color: rgb(0, 0, 0);"));
         sinewaves = new QChartView(centralwidget);
         sinewaves->setObjectName(QString::fromUtf8("sinewaves"));
-        sinewaves->setGeometry(QRect(990, 500, 321, 201));
+        sinewaves->setGeometry(QRect(990, 540, 311, 201));
+        sites = new QComboBox(centralwidget);
+        sites->setObjectName(QString::fromUtf8("sites"));
+        sites->setGeometry(QRect(1000, 500, 291, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -300,6 +305,7 @@ public:
 
         menu->setDefault(false);
         power->setDefault(false);
+        sites->setCurrentIndex(-1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -335,6 +341,7 @@ public:
 "Headset", nullptr));
         chargeDevice->setText(QCoreApplication::translate("MainWindow", "Charge Device", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Admin Panel", nullptr));
+        sites->setCurrentText(QString());
     } // retranslateUi
 
 };
