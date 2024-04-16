@@ -72,6 +72,7 @@ private:
     void turnOffLights();
     void delay(int time = 1000);
     void sessionTimerDecrease();
+    void increaseProgresssBar(int amount);
     bool sessionChecks();
 
 };

@@ -110,7 +110,10 @@ void MainWindow::sessionTimerDecrease() {
     } else {
         ui->sessionTimer->setText("0:0" + QString::fromStdString(std::to_string(--sessionTime)));
     }
-    ui->progressBar->setValue(ui->progressBar->value() + 5);
+}
+
+void MainWindow::increaseProgresssBar(int amount) {
+    ui->progressBar->setValue(ui->progressBar->value() + amount);
 }
 
 bool MainWindow::sessionChecks() {
@@ -205,66 +208,94 @@ void MainWindow::handleNewSessionButton() {
     // delete last session
     // device->deleteLastSession();
 
-    QVector<Session*> sessions = device->getSessions();
-    QLineSeries *newSeries = sessions[0]->getRoundSignals()[0][0];
-    displayChart(newSeries);
-    delay(1000);
-    newSeries = sessions[0]->getRoundSignals()[1][0];
-    displayChart(newSeries);
-    delay(1000);
-    newSeries = sessions[0]->getRoundSignals()[2][0];
-    displayChart(newSeries);
-
+    /*
+        QVector<Session*> sessions = device->getSessions();
+        QLineSeries *newSeries = sessions[0]->getRoundSignals()[0][0];
+        displayChart(newSeries);
+        delay(1000);
+        newSeries = sessions[0]->getRoundSignals()[1][0];
+        displayChart(newSeries);
+        delay(1000);
+        newSeries = sessions[0]->getRoundSignals()[2][0];
+        displayChart(newSeries);
+    */
     
 
-    // //FRONT END
-    // sessionRunning = true;
-    // hideMenus();
-    // menus[1]->show();
-    // ui->menu->setDisabled(true);
-    // ui->upload->setDisabled(true);
-    // ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    //FRONT END
+    sessionRunning = true;
+    hideMenus();
+    menus[1]->show();
+    ui->menu->setDisabled(true);
+    ui->upload->setDisabled(true);
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
 
-    // //SESSION STARTS HERE
-    // stopped = false;
-    // paused = false;
-    // print("Average baseline frequences calculated");
-    // ui->sessionTimer->setText("0:21");
-    // sessionTime = 21;
-    // print("Administering treatment...");
-    // ui->pause->setDisabled(false);
-    // ui->play->setDisabled(false);
-    // ui->stop->setDisabled(false);
-    // bool check;
+    //SESSION STARTS HERE
+    stopped = false;
+    paused = false;
+    ui->sessionTimer->setText("0:29");
+    sessionTime = 30;
+    ui->pause->setDisabled(false);
+    ui->play->setDisabled(false);
+    ui->stop->setDisabled(false);
+    bool check;
 
-    // for (int i = 0; i < 21; i++) {
-    //     sessionTimerDecrease();
+    for (int i = 0; i < 5; i++) {
 
-    //     ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
-    //     greenTimer->start(100);
-    //     delay();
+        ui->eventLog->append("> Obtaining Average Baseline Frequency...");
+        for (int i = 0; i < 5; i++) {
+            sessionTimerDecrease();
+            delay();
 
-    //     check = sessionChecks();
-    //     if (check) {
-    //         sessionRunning = false;
-    //         return;
-    //     }
-    //     if (paused) {
-    //         ui->eventLog->append("> Session paused");
-    //         sessionRunning = false;
-    //         while (paused) {
-    //             delay();
-    //             check = sessionChecks();
-    //             if (check) return;
-    //         }
-    //         ui->eventLog->append("> Session resumed");
-    //         sessionRunning = true;
-    //     }
-    // }
+            check = sessionChecks();
+            if (check) {
+                sessionRunning = false;
+                return;
+            }
+            if (paused) {
+                ui->eventLog->append("> Session paused");
+                sessionRunning = false;
+                while (paused) {
+                    delay();
+                    check = sessionChecks();
+                    if (check) return;
+                }
+                ui->eventLog->append("> Session resumed");
+                sessionRunning = true;
+            }
+        }
 
-    // //SESSION OVER RETURN EVERYTHING BACK
-    // ui->stop->click();
-    // ui->progressBar->setValue(0);
+        ui->eventLog->append("> Applying treatment");
+        sessionTimerDecrease();
+        increaseProgresssBar(20);
+        delay();
+
+        //green light blink
+        ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
+        greenTimer->start(100);
+
+        check = sessionChecks();
+        if (check) {
+            sessionRunning = false;
+            return;
+        }
+        if (paused) {
+            ui->eventLog->append("> Session paused");
+            sessionRunning = false;
+            while (paused) {
+                delay();
+                check = sessionChecks();
+                if (check) return;
+            }
+            ui->eventLog->append("> Session resumed");
+            sessionRunning = true;
+        }
+
+    }
+
+    //SESSION OVER RETURN EVERYTHING BACK
+    sessionRunning = false;
+    ui->stop->click();
+    ui->progressBar->setValue(0);
     
 }
 
@@ -287,7 +318,8 @@ void MainWindow::handlePlayButton() {
 }
 
 void MainWindow::handleStopButton() {
-    //RESET SESSION HUD TIMER AND PROGRESS BAR
+    ui->progressBar->setValue(0);
+    ui->sessionTimer->setText("0:00");
     ui->menu->setDisabled(false);
     stopped = true;
     handleMenuButton();
@@ -321,6 +353,7 @@ void MainWindow::handleReconnectButton() {
     paused = false;
     ui->eventLog->append("> Headset reconnected. Resuming session");
     redTimer->stop();
+    countDown->stop();
     ui->pause->setDisabled(false);
     ui->play->setDisabled(false);
     ui->stop->setDisabled(false);
