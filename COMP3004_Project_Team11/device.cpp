@@ -111,7 +111,7 @@ bool Device::startNewSession(){
 
         offset += 5.0; 
     }
-
+    qDebug() << "====Round 5====";
     for (int i = 0; i < sites.size(); i++){
         qDebug() << "Site " << (i + 1) << " | Alpha Freq: " << sites[i]->getAlphaFreq() << " | Alpha Amp: " << sites[i]->getAlphaAmp();
         qDebug() << "Site " << (i + 1) << " | Beta Freq : " << sites[i]->getBetaFreq() << " | Beta Amp: " << sites[i]->getBetaAmp();
