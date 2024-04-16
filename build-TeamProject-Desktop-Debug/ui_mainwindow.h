@@ -66,6 +66,7 @@ public:
     QPushButton *chargeDevice;
     QLabel *label_4;
     QChartView *sinewaves;
+    QPushButton *deleteSessionsPC;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -287,6 +288,9 @@ public:
         sinewaves = new QChartView(centralwidget);
         sinewaves->setObjectName(QString::fromUtf8("sinewaves"));
         sinewaves->setGeometry(QRect(990, 500, 321, 201));
+        deleteSessionsPC = new QPushButton(centralwidget);
+        deleteSessionsPC->setObjectName(QString::fromUtf8("deleteSessionsPC"));
+        deleteSessionsPC->setGeometry(QRect(120, 500, 83, 25));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -335,6 +339,7 @@ public:
 "Headset", nullptr));
         chargeDevice->setText(QCoreApplication::translate("MainWindow", "Charge Device", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Admin Panel", nullptr));
+        deleteSessionsPC->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };

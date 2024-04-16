@@ -709,6 +709,19 @@ color: rgb(0, 0, 0);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="deleteSessionsPC">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>500</y>
+      <width>83</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

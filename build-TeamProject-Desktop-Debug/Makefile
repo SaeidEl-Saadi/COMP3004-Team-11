@@ -57,7 +57,8 @@ SOURCES       = ../COMP3004_Project_Team11/signalgenprocess.cpp \
 		../COMP3004_Project_Team11/mainwindow.cpp \
 		../COMP3004_Project_Team11/session.cpp \
 		../COMP3004_Project_Team11/site.cpp \
-		../COMP3004_Project_Team11/device.cpp moc_mainwindow.cpp \
+		../COMP3004_Project_Team11/device.cpp qrc_qmake_qmake_immediate.cpp \
+		moc_mainwindow.cpp \
 		moc_session.cpp \
 		moc_site.cpp \
 		moc_device.cpp
@@ -67,6 +68,7 @@ OBJECTS       = signalgenprocess.o \
 		session.o \
 		site.o \
 		device.o \
+		qrc_qmake_qmake_immediate.o \
 		moc_mainwindow.o \
 		moc_session.o \
 		moc_site.o \
@@ -250,7 +252,8 @@ Makefile: ../COMP3004_Project_Team11/TeamProject.pro /usr/lib/x86_64-linux-gnu/q
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../COMP3004_Project_Team11/TeamProject.pro
+		../COMP3004_Project_Team11/TeamProject.pro \
+		qmake_qmake_immediate.qrc
 	$(QMAKE) -o Makefile ../COMP3004_Project_Team11/TeamProject.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -332,6 +335,7 @@ Makefile: ../COMP3004_Project_Team11/TeamProject.pro /usr/lib/x86_64-linux-gnu/q
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../COMP3004_Project_Team11/TeamProject.pro:
+qmake_qmake_immediate.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../COMP3004_Project_Team11/TeamProject.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -346,6 +350,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents qmake_qmake_immediate.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.h ../COMP3004_Project_Team11/mainwindow.h ../COMP3004_Project_Team11/session.h ../COMP3004_Project_Team11/site.h ../COMP3004_Project_Team11/device.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.cpp ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/device.cpp $(DISTDIR)/
@@ -373,8 +378,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_qmake_qmake_immediate.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_qmake_qmake_immediate.cpp
+qrc_qmake_qmake_immediate.cpp: qmake_qmake_immediate.qrc \
+		/usr/lib/qt5/bin/rcc \
+		../COMP3004_Project_Team11/SessionData/upload.txt
+	/usr/lib/qt5/bin/rcc -name qmake_qmake_immediate qmake_qmake_immediate.qrc -o qrc_qmake_qmake_immediate.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -431,7 +442,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -475,6 +486,9 @@ device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/devic
 		../COMP3004_Project_Team11/freqband.h \
 		../COMP3004_Project_Team11/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device.o ../COMP3004_Project_Team11/device.cpp
+
+qrc_qmake_qmake_immediate.o: qrc_qmake_qmake_immediate.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qmake_qmake_immediate.o qrc_qmake_qmake_immediate.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

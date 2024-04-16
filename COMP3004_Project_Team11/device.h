@@ -45,8 +45,14 @@ class Device : public QObject {
         void deleteLatestSession();
         void resetSites();
         
+        bool writeToFile();
+        bool uploadInformation();
+        void readAllSessionPrintPc();
+        void deleteSessionFile();    
+            
     private:
         void printToGUI(QString message);
+        void printToPc(QString message);
 
 };
 

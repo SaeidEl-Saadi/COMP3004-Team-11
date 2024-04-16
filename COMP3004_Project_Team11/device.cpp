@@ -179,3 +179,80 @@ void Device::resetSites(){
         sites[i]->resetSite();
     }
 }
+
+void Device::printToPc(QString message){
+    mainWindow->printPc(message);
+}
+
+bool Device::writeToFile(){
+    QString relativePath = "/../COMP3004_Project_Team11/SessionData/upload.txt";  // Adjust the relative path as needed
+    QString filePath = QCoreApplication::applicationDirPath() + relativePath;
+    QFile file(filePath);
+    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+        printToGUI("Error opening file.");
+        return false;
+    }
+    for (Session* session : sessions){
+        if (session != nullptr){
+            if (session->getHasUploaded() == false){
+                session->setHasUploaded(true);
+                QTextStream out(&file);
+                // out << "Session " << counter << "\n";
+                out << "Date: " << session->getDateTime().toString("yyyy-MM-dd HH:mm:ss") << "\n";
+                out << "Baseline Before: " << session->getAvgBefore() << "\n";
+                out << "Baseline After: " << session->getAvgAfter() << "\n";
+                out << "=====\n";
+
+                printToPc("Date: " + session->getDateTime().toString("yyyy-MM-dd HH:mm:ss"));
+                QString message = QString("Baseline Before: %1").arg(session->getAvgBefore());
+                printToPc(message);
+                message = QString("Baseline After: %1").arg(session->getAvgAfter());
+                printToPc(message);
+                printToPc("=====");
+              
+            }
+        }
+    }
+    file.close();
+    return true;
+}
+
+void Device::readAllSessionPrintPc(){
+    QString relativePath = "/../COMP3004_Project_Team11/SessionData/upload.txt";  // Adjust the relative path as needed
+    QString filePath = QCoreApplication::applicationDirPath() + relativePath;
+    QFile file(filePath);
+    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+        printToGUI("Error opening file.");
+        return;
+    }
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        printToPc(line);
+    }
+    file.close();
+}
+
+bool Device::uploadInformation(){
+    if (writeToFile())
+        printToGUI("Information uploaded successfully.");
+    else 
+        printToGUI("Error uploading information.");
+
+    return true;
+}
+
+void Device::deleteSessionFile(){
+    QString relativePath = "/../COMP3004_Project_Team11/SessionData/upload.txt";  // Adjust the relative path as needed
+    QString filePath = QCoreApplication::applicationDirPath() + relativePath;
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        printToGUI("Error opening file.");
+        return;
+    }
+
+
+    file.resize(0);
+    file.close();
+}

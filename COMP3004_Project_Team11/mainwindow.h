@@ -25,6 +25,7 @@ public:
 
     //functions
     void print(QString str);
+    void printPc(QString str);
 
     //chart function
     void displayChart(QtCharts::QLineSeries *series);
@@ -48,6 +49,7 @@ private slots:
     void handleSubmitDateTime();
     void handleReconnectButton();
     void handleCountDown();
+    void deleteSessionFile();
 
 private:
     //variables

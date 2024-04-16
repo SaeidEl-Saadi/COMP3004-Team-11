@@ -14,7 +14,7 @@ class Session : QObject {
     // attributes
     private:
         QDateTime datetime;
-
+        bool hasUploaded = false;
         double avgBefore;
         double avgAfter;
 
@@ -40,6 +40,9 @@ class Session : QObject {
         
         double getAvgAfter() { return avgAfter; }
         void setAvgAfter(double avgAfter) { this->avgAfter = avgAfter; }
+
+        bool getHasUploaded(){ return hasUploaded; }
+        void setHasUploaded(bool flag){ hasUploaded = flag; }
 
         QVector<QVector<QLineSeries*>> getRoundSignals() { return roundSignals; }
         void setRoundSignal(int round, int site, QLineSeries* signal) { roundSignals[round][site] = signal; }

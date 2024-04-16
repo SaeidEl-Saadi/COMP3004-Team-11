@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="SessionData/upload.txt">/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11/SessionData/upload.txt</file>
+</qresource>
+</RCC>

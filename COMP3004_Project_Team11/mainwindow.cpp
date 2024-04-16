@@ -54,9 +54,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dcHeadset, &QAbstractButton::released, this, &MainWindow::handleDisconnectHeadsetButton);
     connect(ui->setDateTime, &QAbstractButton::released, this, &MainWindow::handleSubmitDateTime);
     connect(ui->reconnect, &QAbstractButton::released, this, &MainWindow::handleReconnectButton);
+    connect(ui->deleteSessionsPC, &QAbstractButton::released, this, &MainWindow::deleteSessionFile);
+
 
     //other stuff
     ui->reconnect->hide();
+    device->readAllSessionPrintPc(); // Print all sessions from upload.txt to pc
 
     //setup chart
     QChart *chart = new QChart();
@@ -94,6 +97,11 @@ void MainWindow::turnOffLights() {
 
 void MainWindow::print(QString str) {
     ui->eventLog->append("> " + str);
+    delay();
+}
+
+void MainWindow::printPc(QString str) {
+    ui->pc->append(str);
     delay();
 }
 
@@ -283,7 +291,14 @@ void MainWindow::handleStopButton() {
 }
 
 void MainWindow::handleUploadButton() {
-
+    // device->deleteSessionFile();
+    ui->upload->setText("Uploading...");
+    ui->upload->setDisabled(true);
+    print("Uploading data...");
+    device->uploadInformation();
+    delay(1000);
+    ui->upload->setText("Upload");
+    ui->upload->setDisabled(false);
 }
 
 void MainWindow::handleDisconnectHeadsetButton() {
@@ -372,6 +387,11 @@ void MainWindow::displayChart(QtCharts::QLineSeries *newSeries) {
     // Add the new series to the chart
     chart->addSeries(newSeries);
     chart->createDefaultAxes(); // Recreate axes to fit the new series
+}
+
+void MainWindow::deleteSessionFile() {
+    device->deleteSessionFile();
+    ui->pc->clear();
 }
 
 
