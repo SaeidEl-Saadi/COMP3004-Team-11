@@ -220,6 +220,7 @@ void MainWindow::handleNewSessionButton() {
     ui->menu->setDisabled(true);
     ui->upload->setDisabled(true);
     ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    ui->eventLog->append("> Start Session on date:\n" + ui->DateTime->dateTime().toString());
 
     //SESSION STARTS HERE
     stopped = false;
@@ -233,7 +234,14 @@ void MainWindow::handleNewSessionButton() {
 
     for (int i = 0; i < 5; i++) {
 
-        ui->eventLog->append("> Obtaining Average Baseline Frequency...");
+        if (i == 0) {
+            ui->eventLog->append("> Calculating dominant frequencies and baseline before treatment....");
+        } else if (i < 5 && i > 0) {
+            ui->eventLog->append("> Recalculating dominant frequencies");
+        } else {
+            ui->eventLog->append("> Recalculating dominant frequencies and baseline after treatment");
+        }
+
         bool temp = true;
         for (int j = 0; j < 10; j++) {
             if (temp) {
@@ -263,14 +271,20 @@ void MainWindow::handleNewSessionButton() {
             }
         }
 
-        ui->eventLog->append("> Applying treatment");
-        sessionTimerDecrease();
-        increaseProgresssBar(20);
-        delay();
+        if (i == 0) {
+            ui->eventLog->append("> Baseline before: " + QString::number(device->getSessions().last()->getAvgBefore()));
+        }
 
-        //green light blink
-        ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
-        greenTimer->start(100);
+        if (i < 4) {
+            ui->eventLog->append("> Applying treatment");
+            sessionTimerDecrease();
+            increaseProgresssBar(20);
+            delay();
+
+            //green light blink
+            ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
+            greenTimer->start(100);
+        }
 
         helpDisplayChart(currentRound, ui->sites->currentIndex());
 
@@ -294,10 +308,15 @@ void MainWindow::handleNewSessionButton() {
 
     }
 
+    ui->eventLog->append("> Baseline after: " + QString::number(device->getSessions().last()->getAvgAfter()));
+
     //SESSION OVER RETURN EVERYTHING BACK
     sessionRunning = false;
     midSession = false;
     currentRound--;
+    sessionTimerDecrease();
+    increaseProgresssBar(20);
+    delay(1000);
     ui->stop->click();
     ui->progressBar->setValue(0);
     
