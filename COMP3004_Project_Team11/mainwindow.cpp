@@ -302,7 +302,6 @@ void MainWindow::handleDisconnectHeadsetButton() {
 void MainWindow::handleSubmitDateTime() {
     QDateTime datetime = ui->DateTime->dateTime();
     device->setDateTime(datetime);
-    qDebug() << device->getDateTime();
 }
 
 void MainWindow::handleReconnectButton() {

@@ -65,6 +65,8 @@ bool Device::startNewSession(){
     // create a session
     Session* session = new Session(this->numSites, getCurrentDateTime());
 
+    qDebug() << "Session start at: " << session->getDateTime().toString();
+
     // generate signal for each site and set round 1 signal
     for (int i = 0; i < sites.size(); i++){
         sites[i]->readSignal(); // ------------------------------------------------------------------------------------------------------------> ROUND 1 SIGNAL GENERATION
@@ -124,7 +126,7 @@ bool Device::startNewSession(){
 
         double fd = sites[i]->getDominantFrequency();
         
-        qDebug() << "Site " << (i + 1) << " | Dominant Freq Band at End: " << fd << "Hz";
+        qDebug() << "Site " << (i + 1) << " | Dominant Freq at End: " << fd << "Hz";
         qDebug() << "----------------------";
 
     }
