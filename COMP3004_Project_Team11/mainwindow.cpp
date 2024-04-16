@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     //instantiate device
-    device = new Device(7, this);
+    device = new Device(2, this);
 
     //setup battery timer
     ui->setupUi(this);
@@ -74,6 +74,7 @@ MainWindow::~MainWindow()
     delete greenTimer;
     delete redTimer;
     delete device;
+    delete countDown;
 }
 
 //functions
@@ -204,18 +205,6 @@ void MainWindow::handleNewSessionButton() {
 
     // delete last session
     // device->deleteLastSession();
-
-    QVector<Session*> sessions = device->getSessions();
-    QLineSeries *newSeries = sessions[0]->getRoundSignals()[0][0];
-    displayChart(newSeries);
-    delay(1000);
-    newSeries = sessions[0]->getRoundSignals()[1][0];
-    displayChart(newSeries);
-    delay(1000);
-    newSeries = sessions[0]->getRoundSignals()[2][0];
-    displayChart(newSeries);
-
-    
 
     // //FRONT END
     // sessionRunning = true;

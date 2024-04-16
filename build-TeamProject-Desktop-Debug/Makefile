@@ -55,29 +55,21 @@ OBJECTS_DIR   = ./
 SOURCES       = ../COMP3004_Project_Team11/signalgenprocess.cpp \
 		../COMP3004_Project_Team11/main.cpp \
 		../COMP3004_Project_Team11/mainwindow.cpp \
-		../COMP3004_Project_Team11/processsignal.cpp \
 		../COMP3004_Project_Team11/session.cpp \
 		../COMP3004_Project_Team11/site.cpp \
-		../COMP3004_Project_Team11/treatment.cpp \
 		../COMP3004_Project_Team11/device.cpp moc_mainwindow.cpp \
-		moc_processsignal.cpp \
 		moc_session.cpp \
 		moc_site.cpp \
-		moc_treatment.cpp \
 		moc_device.cpp
 OBJECTS       = signalgenprocess.o \
 		main.o \
 		mainwindow.o \
-		processsignal.o \
 		session.o \
 		site.o \
-		treatment.o \
 		device.o \
 		moc_mainwindow.o \
-		moc_processsignal.o \
 		moc_session.o \
 		moc_site.o \
-		moc_treatment.o \
 		moc_device.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -160,18 +152,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../COMP3004_Project_Team11/TeamProject.pro ../COMP3004_Project_Team11/signalgenprocess.h \
 		../COMP3004_Project_Team11/mainwindow.h \
-		../COMP3004_Project_Team11/processsignal.h \
 		../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/treatment.h \
-		../COMP3004_Project_Team11/brainregion.h \
 		../COMP3004_Project_Team11/device.h ../COMP3004_Project_Team11/signalgenprocess.cpp \
 		../COMP3004_Project_Team11/main.cpp \
 		../COMP3004_Project_Team11/mainwindow.cpp \
-		../COMP3004_Project_Team11/processsignal.cpp \
 		../COMP3004_Project_Team11/session.cpp \
 		../COMP3004_Project_Team11/site.cpp \
-		../COMP3004_Project_Team11/treatment.cpp \
 		../COMP3004_Project_Team11/device.cpp
 QMAKE_TARGET  = TeamProject
 DESTDIR       = 
@@ -360,8 +347,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.h ../COMP3004_Project_Team11/mainwindow.h ../COMP3004_Project_Team11/processsignal.h ../COMP3004_Project_Team11/session.h ../COMP3004_Project_Team11/site.h ../COMP3004_Project_Team11/treatment.h ../COMP3004_Project_Team11/brainregion.h ../COMP3004_Project_Team11/device.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.cpp ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11/device.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.h ../COMP3004_Project_Team11/mainwindow.h ../COMP3004_Project_Team11/session.h ../COMP3004_Project_Team11/site.h ../COMP3004_Project_Team11/device.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../COMP3004_Project_Team11/signalgenprocess.cpp ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/device.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../COMP3004_Project_Team11/mainwindow.ui $(DISTDIR)/
 
 
@@ -394,18 +381,13 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_session.cpp moc_site.cpp moc_device.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_processsignal.cpp moc_session.cpp moc_site.cpp moc_treatment.cpp moc_device.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_session.cpp moc_site.cpp moc_device.cpp
 moc_mainwindow.cpp: ../COMP3004_Project_Team11/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/mainwindow.h -o moc_mainwindow.cpp
-
-moc_processsignal.cpp: ../COMP3004_Project_Team11/processsignal.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/processsignal.h -o moc_processsignal.cpp
 
 moc_session.cpp: ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
@@ -420,12 +402,6 @@ moc_site.cpp: ../COMP3004_Project_Team11/site.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/site.h -o moc_site.cpp
-
-moc_treatment.cpp: ../COMP3004_Project_Team11/treatment.h \
-		../COMP3004_Project_Team11/processsignal.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/treatment.h -o moc_treatment.cpp
 
 moc_device.cpp: ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
@@ -481,9 +457,6 @@ mainwindow.o: ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team
 		../COMP3004_Project_Team11/freqband.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../COMP3004_Project_Team11/mainwindow.cpp
 
-processsignal.o: ../COMP3004_Project_Team11/processsignal.cpp ../COMP3004_Project_Team11/processsignal.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processsignal.o ../COMP3004_Project_Team11/processsignal.cpp
-
 session.o: ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
@@ -493,10 +466,6 @@ session.o: ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/ses
 site.o: ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o site.o ../COMP3004_Project_Team11/site.cpp
-
-treatment.o: ../COMP3004_Project_Team11/treatment.cpp ../COMP3004_Project_Team11/treatment.h \
-		../COMP3004_Project_Team11/processsignal.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o treatment.o ../COMP3004_Project_Team11/treatment.cpp
 
 device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
@@ -510,17 +479,11 @@ device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/devic
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
-moc_processsignal.o: moc_processsignal.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_processsignal.o moc_processsignal.cpp
-
 moc_session.o: moc_session.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_session.o moc_session.cpp
 
 moc_site.o: moc_site.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_site.o moc_site.cpp
-
-moc_treatment.o: moc_treatment.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_treatment.o moc_treatment.cpp
 
 moc_device.o: moc_device.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_device.o moc_device.cpp

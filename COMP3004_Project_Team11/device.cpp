@@ -4,11 +4,11 @@
 Device::Device(int numSites, MainWindow* ui, QObject *parent) : QObject{parent} {
 
     // generator for all the sites
-    SignalGenProcess* generator = new SignalGenProcess(5, 10); // 5 seconds, 10 samples per second
+    generatorProcessor = new SignalGenProcess(5, 10); // 5 seconds, 10 samples per second
 
     // create all the sites
     for (int i = 0; i < numSites; i++) {
-        Site* site = new Site(generator); 
+        Site* site = new Site(generatorProcessor); 
         sites.push_back(site);
     }
 
@@ -17,6 +17,18 @@ Device::Device(int numSites, MainWindow* ui, QObject *parent) : QObject{parent} 
 
     // set the main window
     mainWindow = ui;
+}
+
+Device::~Device(){
+    for (int i = 0; i < sites.size(); i++){
+        delete sites[i];
+    }
+
+    for (int i = 0; i < sessions.size(); i++){
+        delete sessions[i];
+    }
+
+    delete generatorProcessor;
 }
 
 void Device::setDateTime(QDateTime datetime){
@@ -53,11 +65,10 @@ bool Device::startNewSession(){
     // create a session
     Session* session = new Session(this->numSites, getCurrentDateTime());
 
-     
     // generate signal for each site and set round 1 signal
     for (int i = 0; i < sites.size(); i++){
         sites[i]->readSignal(); // ------------------------------------------------------------------------------------------------------------> ROUND 1 SIGNAL GENERATION
-        session->setRoundSignal(0, i, sites[i]->getSignal()); 
+        session->setRoundSignal(0, i, sites[i]->getSignal());
     }
 
     // calculate baseline before treatment
@@ -65,6 +76,7 @@ bool Device::startNewSession(){
 
     double offset = 5.0;
 
+    
     for (int i = 1; i < 5; i++) {
 
         qDebug() << "====Round " << (i) << "====";
@@ -75,20 +87,22 @@ bool Device::startNewSession(){
             qDebug() << "Site " << (j + 1) << " | Beta Freq : " << sites[j]->getBetaFreq() << " | Beta Amp: " << sites[j]->getBetaAmp();
             qDebug() << "Site " << (j + 1) << " | Delta Freq: " << sites[j]->getDeltaFreq() << " | Delta Amp: " << sites[j]->getDeltaAmp();
             qDebug() << "Site " << (j + 1) << " | Theta Freq: " << sites[j]->getThetaFreq() << " | Theta Amp: " << sites[j]->getThetaAmp();
+            qDebug() << "Site " << (j + 1) << " | Treatment Freq Round 1: " << sites[j]->getTreatFreqRound1() << " | Treatment Ampl Round 1: " << sites[j]->getTreatAmplRound1();
+            qDebug() << "Site " << (j + 1) << " | Treatment Freq Round 2: " << sites[j]->getTreatFreqRound2() << " | Treatment Ampl Round 2: " << sites[j]->getTreatAmplRound2();
+            qDebug() << "Site " << (j + 1) << " | Treatment Freq Round 3: " << sites[j]->getTreatFreqRound3() << " | Treatment Ampl Round 3: " << sites[j]->getTreatAmplRound3();
+            qDebug() << "Site " << (j + 1) << " | Treatment Freq Round 4: " << sites[j]->getTreatFreqRound4() << " | Treatment Ampl Round 4: " << sites[j]->getTreatAmplRound4();
+            qDebug() << "Site " << (j + 1) << " | Dominant Freq Band: " << sites[j]->getDominantFrequency() << "Hz";
+
 
             // get dominant frequency
             double fd = sites[j]->getDominantFrequency();
-            FreqBand band = getFreqBand(fd);
 
-            qDebug() << "Site " << (j + 1) << " | Dominant Freq Band: " << getFreqBandString(band) << " " << fd << "Hz";
-            qDebug() << "Site " << (j + 1) << " | Adding offset: " << offset << "Hz to " << getFreqBandString(band);
+            qDebug() << "Site " << (j + 1) << " | Adding offset: " << offset << "Hz to " << fd << "Hz";
+            qDebug() << "----------------------";
 
-            // add offset to dominant frequency(apply treatment)
-            // addOffset(band, offset, sites[j]); // -----------------------------------------------------------------------------------------------> TREATMENT ADDING OFFSET
+            sites[j]->setTreatmentFreq(i - 1, fd + offset); // ------------------------------------------------------------------------------------------------------> TREATMENT
+            sites[j]->genTreatmentAmpl(i - 1); // -----------------------------------------------------------------------------------------------------------> TREATMENT 
 
-            // get new amplitude and signal
-            sites[j]->newAmp();
-            sites[j]->newFreq();
             sites[j]->readSignal(); // -----------------------------------------------------------------------------------------------------------> ROUND 2-5 SIGNAL GENERATION
 
             // update graphs for this round
@@ -97,28 +111,34 @@ bool Device::startNewSession(){
 
         offset += 5.0; 
     }
-    
-    
-    qDebug() << "====Round 5(last)====";
-    qDebug() << "Site 1 | Alpha Freq: " << sites[0]->getAlphaFreq() << " | Alpha Amp: " << sites[0]->getAlphaAmp();
-    qDebug() << "Site 1 | Beta Freq : " << sites[0]->getBetaFreq() << " | Beta Amp: " << sites[0]->getBetaAmp();
-    qDebug() << "Site 1 | Delta Freq: " << sites[0]->getDeltaFreq() << " | Delta Amp: " << sites[0]->getDeltaAmp();
-    qDebug() << "Site 1 | Theta Freq: " << sites[0]->getThetaFreq() << " | Theta Amp: " << sites[0]->getThetaAmp();
 
-    double fd = sites[0]->getDominantFrequency();
-    FreqBand band = getFreqBand(fd);
-    
-    qDebug() << "Site 1 Dominant Freq Band at End: " << getFreqBandString(band) << " " << fd << "Hz";
+    for (int i = 0; i < sites.size(); i++){
+        qDebug() << "Site " << (i + 1) << " | Alpha Freq: " << sites[i]->getAlphaFreq() << " | Alpha Amp: " << sites[i]->getAlphaAmp();
+        qDebug() << "Site " << (i + 1) << " | Beta Freq : " << sites[i]->getBetaFreq() << " | Beta Amp: " << sites[i]->getBetaAmp();
+        qDebug() << "Site " << (i + 1) << " | Delta Freq: " << sites[i]->getDeltaFreq() << " | Delta Amp: " << sites[i]->getDeltaAmp();
+        qDebug() << "Site " << (i + 1) << " | Theta Freq: " << sites[i]->getThetaFreq() << " | Theta Amp: " << sites[i]->getThetaAmp();
+        qDebug() << "Site " << (i + 1) << " | Treatment Freq Round 1: " << sites[i]->getTreatFreqRound1() << " | Treatment Ampl Round 1: " << sites[i]->getTreatAmplRound1();
+        qDebug() << "Site " << (i + 1) << " | Treatment Freq Round 2: " << sites[i]->getTreatFreqRound2() << " | Treatment Ampl Round 2: " << sites[i]->getTreatAmplRound2();
+        qDebug() << "Site " << (i + 1) << " | Treatment Freq Round 3: " << sites[i]->getTreatFreqRound3() << " | Treatment Ampl Round 3: " << sites[i]->getTreatAmplRound3();
+        qDebug() << "Site " << (i + 1) << " | Treatment Freq Round 4: " << sites[i]->getTreatFreqRound4() << " | Treatment Ampl Round 4: " << sites[i]->getTreatAmplRound4();
+
+        double fd = sites[i]->getDominantFrequency();
+        
+        qDebug() << "Site " << (i + 1) << " | Dominant Freq Band at End: " << fd << "Hz";
+        qDebug() << "----------------------";
+
+    }
 
     // calculate baseline after treatment
     session->setAvgAfter(getBaseLine()); // ------------------------------------------------------------------------------------------------------> BASELINE AFTER 
+    qDebug() << "====Baseline====";
+    qDebug() << "Baseline Before: " << session->getAvgBefore() << "Hz" << " | Baseline After: " << session->getAvgAfter() << "Hz";
 
     // add session to the list
     sessions.push_back(session);
 
-    // reset frequencies
-    for(int i = 0;i < sites.size(); i++)
-        sites[i]->newFreq();
+    // reset sites
+    resetSites();
     
     return true;
 }
@@ -130,7 +150,6 @@ void Device::printToGUI(QString message){
 double Device::getBaseLine(){
     // check if initial signal is generated
     if (sites[0]->getSignal() == nullptr){
-        printToGUI("Please generate the initial signal first.");
         return -1.0;
     }
 
@@ -143,40 +162,6 @@ double Device::getBaseLine(){
     return avgBaseline/sites.size();
 }
 
-// alpha [8-12Hz], beta [12-30Hz], delta [1-4Hz], theta [4-8Hz]
-FreqBand Device::getFreqBand(double fd){
-    if (fd >= 8.0 && fd <= 12.0)
-        return FreqBand::ALPHA;
-    else if (fd > 12.0 && fd <= 30.0)
-        return FreqBand::BETA;
-    else if (fd >= 1.0 && fd <= 4.0)
-        return FreqBand::DELTA;
-    else if (fd > 4.0 && fd <= 8.0)
-        return FreqBand::THETA;
-}
-
-void Device::addOffset(FreqBand band, double offset, Site* site) {
-    if (band == FreqBand::ALPHA)
-        site->addAlphaFreq(offset);
-    else if (band == FreqBand::BETA)
-        site->addBetaFreq(offset);
-    else if (band == FreqBand::DELTA)
-        site->addDeltaFreq(offset);
-    else if (band == FreqBand::THETA)
-        site->addThetaFreq(offset);
-}
-
-QString Device::getFreqBandString(FreqBand band){
-    if (band == FreqBand::ALPHA)
-        return "Alpha";
-    else if (band == FreqBand::BETA)
-        return "Beta";
-    else if (band == FreqBand::DELTA)
-        return "Delta";
-    else if (band == FreqBand::THETA)
-        return "Theta";
-}
-
 void Device::deleteLatestSession(){
     if (sessions.size() == 0){
         return;
@@ -185,4 +170,10 @@ void Device::deleteLatestSession(){
     Session* session = sessions[sessions.size() - 1];
     sessions.pop_back();
     delete session;
+}
+
+void Device::resetSites(){
+    for (int i = 0; i < sites.size(); i++){
+        sites[i]->resetSite();
+    }
 }

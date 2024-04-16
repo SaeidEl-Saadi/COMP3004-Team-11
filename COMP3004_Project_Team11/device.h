@@ -21,7 +21,8 @@ class Device : public QObject {
         QVector<Site*> sites;
         QVector<Session*> sessions; 
         QDateTime datetime; // current date and time by the user
-        QDateTime actualTimeSet; // real current system time when the device is set
+        QDateTime actualTimeSet; // real current system time when the device is 
+        SignalGenProcess* generatorProcessor;
         MainWindow* mainWindow;
         int numSites;
 
@@ -29,6 +30,7 @@ class Device : public QObject {
     public:
         // constructor
         Device(int numSites, MainWindow* ui, QObject *parent = nullptr);
+        ~Device();
 
         //setters and getters
         QVector<Site*> getSites() { return sites; }
@@ -39,11 +41,10 @@ class Device : public QObject {
 
         bool startNewSession();
         double getBaseLine();
-        FreqBand getFreqBand(double fd);
-        QString getFreqBandString(FreqBand band);
 
-        void addOffset(FreqBand band, double offset, Site* site);
         void deleteLatestSession();
+        void resetSites();
+        
     private:
         void printToGUI(QString message);
 

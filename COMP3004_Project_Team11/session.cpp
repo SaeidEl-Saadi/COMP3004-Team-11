@@ -11,11 +11,13 @@ Session::Session(int numSites, QDateTime datetime, QObject *parent) : QObject(pa
     }
 }
 
+
 void Session::deleteCharts() {
     // delete the last session
     for (int i = 0; i < roundSignals.size(); i++){
         for (int j = 0; j < roundSignals[i].size(); j++){
-            delete roundSignals[i][j];
+            if (roundSignals[i][j] != nullptr)
+                delete roundSignals[i][j];
         }
     }
 }
