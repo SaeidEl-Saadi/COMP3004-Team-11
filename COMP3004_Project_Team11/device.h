@@ -8,7 +8,11 @@
 #include "site.h"
 #include "session.h"
 #include "signalgenprocess.h"
-#include "freqband.h"
+#include <QFile>
+#include <QTextStream>
+#include <iostream>
+#include <string>
+#include <QString>
 //#include "mainwindow.h"
 
 class MainWindow;

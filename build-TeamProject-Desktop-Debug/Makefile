@@ -403,7 +403,6 @@ moc_mainwindow.cpp: ../COMP3004_Project_Team11/mainwindow.h \
 moc_session.cpp: ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
-		../COMP3004_Project_Team11/brainregion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/session.h -o moc_session.cpp
@@ -418,8 +417,6 @@ moc_device.cpp: ../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
 		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/brainregion.h \
-		../COMP3004_Project_Team11/freqband.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_Final_Project/Final/COMP3004-Team-11/build-TeamProject-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_Final_Project/Final/COMP3004-Team-11/COMP3004_Project_Team11 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCharts -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../COMP3004_Project_Team11/device.h -o moc_device.cpp
@@ -453,9 +450,7 @@ main.o: ../COMP3004_Project_Team11/main.cpp ../COMP3004_Project_Team11/mainwindo
 		../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
-		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/brainregion.h \
-		../COMP3004_Project_Team11/freqband.h
+		../COMP3004_Project_Team11/session.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../COMP3004_Project_Team11/main.cpp
 
 mainwindow.o: ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team11/mainwindow.h \
@@ -463,15 +458,12 @@ mainwindow.o: ../COMP3004_Project_Team11/mainwindow.cpp ../COMP3004_Project_Team
 		../COMP3004_Project_Team11/device.h \
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
-		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/brainregion.h \
-		../COMP3004_Project_Team11/freqband.h
+		../COMP3004_Project_Team11/session.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../COMP3004_Project_Team11/mainwindow.cpp
 
 session.o: ../COMP3004_Project_Team11/session.cpp ../COMP3004_Project_Team11/session.h \
 		../COMP3004_Project_Team11/site.h \
-		../COMP3004_Project_Team11/signalgenprocess.h \
-		../COMP3004_Project_Team11/brainregion.h
+		../COMP3004_Project_Team11/signalgenprocess.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o session.o ../COMP3004_Project_Team11/session.cpp
 
 site.o: ../COMP3004_Project_Team11/site.cpp ../COMP3004_Project_Team11/site.h \
@@ -482,8 +474,6 @@ device.o: ../COMP3004_Project_Team11/device.cpp ../COMP3004_Project_Team11/devic
 		../COMP3004_Project_Team11/site.h \
 		../COMP3004_Project_Team11/signalgenprocess.h \
 		../COMP3004_Project_Team11/session.h \
-		../COMP3004_Project_Team11/brainregion.h \
-		../COMP3004_Project_Team11/freqband.h \
 		../COMP3004_Project_Team11/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o device.o ../COMP3004_Project_Team11/device.cpp
 

@@ -197,18 +197,16 @@ bool Device::writeToFile(){
             if (session->getHasUploaded() == false){
                 session->setHasUploaded(true);
                 QTextStream out(&file);
-                // out << "Session " << counter << "\n";
                 out << "Date: " << session->getDateTime().toString("yyyy-MM-dd HH:mm:ss") << "\n";
                 out << "Baseline Before: " << session->getAvgBefore() << "\n";
                 out << "Baseline After: " << session->getAvgAfter() << "\n";
-                out << "=====\n";
-
+                out << "===============================\n";
+                
+                //Date
                 printToPc("Date: " + session->getDateTime().toString("yyyy-MM-dd HH:mm:ss"));
-                QString message = QString("Baseline Before: %1").arg(session->getAvgBefore());
-                printToPc(message);
-                message = QString("Baseline After: %1").arg(session->getAvgAfter());
-                printToPc(message);
-                printToPc("=====");
+                
+                //Baselines
+                printToPc(QString("Baseline Before: %1").arg(session->getAvgBefore()) + "\n" + QString("Baseline After: %1").arg(session->getAvgAfter()) + "\n===============================");
               
             }
         }
@@ -221,7 +219,7 @@ void Device::readAllSessionPrintPc(){
     QString relativePath = "/../COMP3004_Project_Team11/SessionData/upload.txt";  // Adjust the relative path as needed
     QString filePath = QCoreApplication::applicationDirPath() + relativePath;
     QFile file(filePath);
-    if (!file.open(QIODevice::Append | QIODevice::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         printToGUI("Error opening file.");
         return;
     }
@@ -236,7 +234,7 @@ void Device::readAllSessionPrintPc(){
 
 bool Device::uploadInformation(){
     if (writeToFile())
-        printToGUI("Information uploaded successfully.");
+        printToGUI("Data upload success");
     else 
         printToGUI("Error uploading information.");
 
@@ -252,6 +250,13 @@ void Device::deleteSessionFile(){
         return;
     }
 
+    printToGUI("PC data deleted");
+    
+    for(int i = 0; i < sessions.size(); i++){
+        sessions[i]->setHasUploaded(false);
+    }
+    
+    
 
     file.resize(0);
     file.close();

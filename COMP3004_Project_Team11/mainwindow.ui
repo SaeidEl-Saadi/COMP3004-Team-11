@@ -667,7 +667,7 @@ Headset</string>
     <widget class="QPushButton" name="chargeDevice">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>180</x>
        <y>90</y>
        <width>111</width>
        <height>51</height>
@@ -679,6 +679,23 @@ background-color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
       <string>Charge Device</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deletePCData">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;DejaVu Sans Mono&quot;;
+background-color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Delete PC Data</string>
      </property>
     </widget>
    </widget>
@@ -703,23 +720,26 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>990</x>
-      <y>500</y>
-      <width>321</width>
+      <y>540</y>
+      <width>311</width>
       <height>201</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="deleteSessionsPC">
+   <widget class="QComboBox" name="sites">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>1000</x>
       <y>500</y>
-      <width>83</width>
-      <height>25</height>
+      <width>291</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="currentText">
+     <string/>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
     </property>
    </widget>
   </widget>

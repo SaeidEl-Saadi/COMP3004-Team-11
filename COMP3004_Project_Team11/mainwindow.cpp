@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     //instantiate device
-    device = new Device(2, this);
+    device = new Device(7, this);
 
     //setup battery timer
     ui->setupUi(this);
@@ -39,6 +39,16 @@ MainWindow::MainWindow(QWidget *parent)
     hideMenus();
     menus[0]->show();
 
+    //setup combo box items
+    ui->sites->addItem("Site 1");
+    ui->sites->addItem("Site 2");
+    ui->sites->addItem("Site 3");
+    ui->sites->addItem("Site 4");
+    ui->sites->addItem("Site 5");
+    ui->sites->addItem("Site 6");
+    ui->sites->addItem("Site 7");
+    connect(ui->sites, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleComboBox);
+
     //connect buttons
     connect(ui->power, &QAbstractButton::released, this, &MainWindow::handlePowerButton);
     connect(ui->menu, &QAbstractButton::released, this, &MainWindow::handleMenuButton);
@@ -54,19 +64,22 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dcHeadset, &QAbstractButton::released, this, &MainWindow::handleDisconnectHeadsetButton);
     connect(ui->setDateTime, &QAbstractButton::released, this, &MainWindow::handleSubmitDateTime);
     connect(ui->reconnect, &QAbstractButton::released, this, &MainWindow::handleReconnectButton);
-    connect(ui->deleteSessionsPC, &QAbstractButton::released, this, &MainWindow::deleteSessionFile);
-
+    connect(ui->deletePCData, &QAbstractButton::released, this, &MainWindow::deleteSessionFile);
 
     //other stuff
     ui->reconnect->hide();
-    device->readAllSessionPrintPc(); // Print all sessions from upload.txt to pc
 
+    // loads sessions from upload.txt to pc
+    device->readAllSessionPrintPc(); 
+    
     //setup chart
     QChart *chart = new QChart();
-    chart->setTitle("I hate these f***ing charts");
+    chart->setTitle("No Signal");
     chart->createDefaultAxes();
     ui->sinewaves->setChart(chart);
     ui->sinewaves->setRenderHint(QPainter::Antialiasing);
+
+
 
 }
 
@@ -119,7 +132,10 @@ void MainWindow::sessionTimerDecrease() {
     } else {
         ui->sessionTimer->setText("0:0" + QString::fromStdString(std::to_string(--sessionTime)));
     }
-    ui->progressBar->setValue(ui->progressBar->value() + 5);
+}
+
+void MainWindow::increaseProgresssBar(int amount) {
+    ui->progressBar->setValue(ui->progressBar->value() + amount);
 }
 
 bool MainWindow::sessionChecks() {
@@ -136,8 +152,14 @@ bool MainWindow::sessionChecks() {
 //slots
 void MainWindow::handlePowerButton() {
     if (!isPowerOff) {
+        if (midSession) {
+            device->deleteLatestSession();
+
+            currentRound = 4;
+        }
         isPowerOff = true;
         sessionRunning = false;
+        midSession =  false;
         ui->reconnect->hide();
         ui->menu->setDisabled(true);
         ui->offScreen->show();
@@ -199,75 +221,135 @@ void MainWindow::handleNewSessionButton() {
     // BACK END
     if(!device->startNewSession())
         return; 
+    midSession = true;
+    currentRound = 0;
+    
 
-    // Sessions from Device class: returns QVector<Session*>
-    // Session* sessions = device->getSessions()
+    //FRONT END
+    sessionRunning = true;
+    hideMenus();
+    menus[1]->show();
+    ui->menu->setDisabled(true);
+    ui->upload->setDisabled(true);
+    ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+    ui->eventLog->append("> Session started on:\n" + device->getSessions().last()->getDateTime().toString("yyyy-MM-dd hh:mm:ss"));
 
-    // roundSignals from Session class: returns QVector<QVector<QLineSeries*>>
-    // QVector<QVector<QLineSeries*>> roundSignals = session->getRoundSignals();
-    // roundSignals structure(always 5 rounds, but variable sites):
-        // [round 1] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal] 
-        // [round 2] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
-        // ....
-        // [round 5] = [site 1 signal, site 2 signal, site 3 signal, site 4 signal, site 5 signal, site 6 signal, site 7 signal]
+    //SESSION STARTS HERE
+    stopped = false;
+    paused = false;
+    ui->sessionTimer->setText("0:29");
+    sessionTime = 30;
+    ui->pause->setDisabled(false);
+    ui->play->setDisabled(false);
+    ui->stop->setDisabled(false);
+    bool check;
 
-    // delete last session
-    // device->deleteLastSession();
+    for (int i = 0; i < 5; i++) {
+        ui->eventLog->append("> ========Round " + QString::number(i + 1) + "========");
+        if (i == 0) {
+            ui->eventLog->append("> Calculating dominant frequencies and baseline before treatment....");
+        } else if (i < 5 && i > 0) {
+            ui->eventLog->append("> Recalculating dominant frequencies");
+        } else {
+            ui->eventLog->append("> Recalculating dominant frequencies and baseline after treatment");
+        }
 
-    // //FRONT END
-    // sessionRunning = true;
-    // hideMenus();
-    // menus[1]->show();
-    // ui->menu->setDisabled(true);
-    // ui->upload->setDisabled(true);
-    // ui->blueLight->setStyleSheet("background-color: rgba(0, 0, 255, 1);");
+        bool temp = true;
+        for (int j = 0; j < 10; j++) { // 10 * 500ms = 5 seconds (to reconnect the headset if disconnected)
+            if (temp) {
+                sessionTimerDecrease();
+                temp = false;
+            } else {
+                temp = true;
+            }
 
-    // //SESSION STARTS HERE
-    // stopped = false;
-    // paused = false;
-    // print("Average baseline frequences calculated");
-    // ui->sessionTimer->setText("0:21");
-    // sessionTime = 21;
-    // print("Administering treatment...");
-    // ui->pause->setDisabled(false);
-    // ui->play->setDisabled(false);
-    // ui->stop->setDisabled(false);
-    // bool check;
+            delay(500);
 
-    // for (int i = 0; i < 21; i++) {
-    //     sessionTimerDecrease();
+            check = sessionChecks();
+            if (check) {
+                sessionRunning = false;
+                return;
+            }
+            if (paused) {
+                ui->eventLog->append("> Session paused");
+                sessionRunning = false;
+                while (paused) {
+                    delay();
+                    check = sessionChecks();
+                    if (check) return;
+                }
+                ui->eventLog->append("> Session resumed");
+                sessionRunning = true;
+            }
+        }
 
-    //     ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
-    //     greenTimer->start(100);
-    //     delay();
+        if (i == 0) {
+            ui->eventLog->append("> Baseline before: " + QString::number(device->getSessions().last()->getAvgBefore()));
+        }
 
-    //     check = sessionChecks();
-    //     if (check) {
-    //         sessionRunning = false;
-    //         return;
-    //     }
-    //     if (paused) {
-    //         ui->eventLog->append("> Session paused");
-    //         sessionRunning = false;
-    //         while (paused) {
-    //             delay();
-    //             check = sessionChecks();
-    //             if (check) return;
-    //         }
-    //         ui->eventLog->append("> Session resumed");
-    //         sessionRunning = true;
-    //     }
-    // }
+        if (i < 4) {
+            ui->eventLog->append("> Applying treatment");
+            sessionTimerDecrease();
+            increaseProgresssBar(20);
+            delay();
 
-    // //SESSION OVER RETURN EVERYTHING BACK
-    // ui->stop->click();
-    // ui->progressBar->setValue(0);
+            //green light blink
+            ui->greenLight->setStyleSheet("background-color: rgba(0, 255, 0, 1);");
+            greenTimer->start(100);
+        }
+
+
+        helpDisplayChart(currentRound, ui->sites->currentIndex());
+
+        check = sessionChecks();
+        if (check) {
+            sessionRunning = false;
+            return;
+        }
+        if (paused) {
+            ui->eventLog->append("> Session paused");
+            sessionRunning = false;
+            while (paused) {
+                delay();
+                check = sessionChecks();
+                if (check) return;
+            }
+            ui->eventLog->append("> Session resumed");
+            sessionRunning = true;
+        }
+        currentRound++;
+
+    }
+
+    ui->eventLog->append("> Baseline after: " + QString::number(device->getSessions().last()->getAvgAfter()));
+    ui->eventLog->append("> ===Session completed===");
+
+    //SESSION OVER RETURN EVERYTHING BACK
+    sessionRunning = false;
+    midSession = false;
+    currentRound--;
+    sessionTimerDecrease();
+    increaseProgresssBar(20);
+    delay(1000);
+    ui->stop->click();
+    ui->progressBar->setValue(0);
     
 }
 
 void MainWindow::handleSessionHistoryButton() {
     hideMenus();
     menus[2]->show();
+    ui->sessionLogs->clear();
+    QVector<Session*> sessions = device->getSessions();
+    if (sessions.isEmpty()) {
+        ui->sessionLogs->append("> No sessions to display.");
+        return;
+    }
+    
+    for (int i = 0; i < sessions.size(); i++) {
+        ui->sessionLogs->append("Session " + QString::number(i + 1) + ": " + sessions[i]->getDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+        ui->sessionLogs->append("------------");
+    }
 }
 
 void MainWindow::handleDateTimeButton() {
@@ -284,19 +366,24 @@ void MainWindow::handlePlayButton() {
 }
 
 void MainWindow::handleStopButton() {
-    //RESET SESSION HUD TIMER AND PROGRESS BAR
+    if (midSession) {
+        device->deleteLatestSession();
+        midSession = false;
+
+        currentRound = 4;
+    }
+    ui->progressBar->setValue(0);
+    ui->sessionTimer->setText("0:00");
     ui->menu->setDisabled(false);
     stopped = true;
     handleMenuButton();
 }
 
 void MainWindow::handleUploadButton() {
-    // device->deleteSessionFile();
     ui->upload->setText("Uploading...");
     ui->upload->setDisabled(true);
-    print("Uploading data...");
+    print("Uploading data to PC...");
     device->uploadInformation();
-    delay(1000);
     ui->upload->setText("Upload");
     ui->upload->setDisabled(false);
 }
@@ -317,6 +404,7 @@ void MainWindow::handleDisconnectHeadsetButton() {
 void MainWindow::handleSubmitDateTime() {
     QDateTime datetime = ui->DateTime->dateTime();
     device->setDateTime(datetime);
+    qDebug() << device->getDateTime();
 }
 
 void MainWindow::handleReconnectButton() {
@@ -324,6 +412,7 @@ void MainWindow::handleReconnectButton() {
     paused = false;
     ui->eventLog->append("> Headset reconnected. Resuming session");
     redTimer->stop();
+    countDown->stop();
     ui->pause->setDisabled(false);
     ui->play->setDisabled(false);
     ui->stop->setDisabled(false);
@@ -333,12 +422,24 @@ void MainWindow::handleReconnectButton() {
 
 void MainWindow::handleCountDown() {
     if (isPowerOff) return;
+    if (midSession) {
+        device->deleteLatestSession();
+        midSession = false;
+
+        currentRound = 4;
+    }
     ui->power->click();
 }
 
 void MainWindow::batteryDecrease() {
     battery--;
     if (battery == 0) {
+        if (midSession) {
+            device->deleteLatestSession();
+            midSession = false;
+
+            currentRound = 4;
+        }
         timer->stop();
         ui->power->click();
         ui->power->setDisabled(true);
@@ -375,7 +476,7 @@ void MainWindow::redLightBlink() {
 }
 
 // an example of displayChart function
-void MainWindow::displayChart(QtCharts::QLineSeries *newSeries) {
+void MainWindow::displayChart(QtCharts::QLineSeries *newSeries, int round) {
     QChart *chart = ui->sinewaves->chart();
 
     // Remove all series from the chart
@@ -386,7 +487,26 @@ void MainWindow::displayChart(QtCharts::QLineSeries *newSeries) {
 
     // Add the new series to the chart
     chart->addSeries(newSeries);
-    chart->createDefaultAxes(); // Recreate axes to fit the new series
+
+    // Recreate default axes to fit the new series automatically
+    chart->createDefaultAxes(); 
+
+    // Set the chart title to indicate the round number
+    chart->setTitle("Round " + QString::number(round + 1));
+
+    // Optionally force an update to make sure the chart reevaluates its layout
+    chart->update();
+}
+
+void MainWindow::helpDisplayChart(int round, int site) {
+    Session* session = device->getSessions().last();
+    QLineSeries *newSeries = session->getRoundSignals()[round][site];
+    displayChart(newSeries, round);
+}
+
+void MainWindow::handleComboBox(int index) {
+    if (device->getSessions().isEmpty()) return;
+    helpDisplayChart(currentRound, index);
 }
 
 void MainWindow::deleteSessionFile() {

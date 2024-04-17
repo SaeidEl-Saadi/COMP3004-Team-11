@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
@@ -64,9 +65,10 @@ public:
     QPushButton *lowBattery;
     QPushButton *dcHeadset;
     QPushButton *chargeDevice;
+    QPushButton *deletePCData;
     QLabel *label_4;
     QChartView *sinewaves;
-    QPushButton *deleteSessionsPC;
+    QComboBox *sites;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -277,8 +279,13 @@ public:
 "background-color: rgb(255, 255, 255);"));
         chargeDevice = new QPushButton(adminPanel);
         chargeDevice->setObjectName(QString::fromUtf8("chargeDevice"));
-        chargeDevice->setGeometry(QRect(110, 90, 111, 51));
+        chargeDevice->setGeometry(QRect(180, 90, 111, 51));
         chargeDevice->setStyleSheet(QString::fromUtf8("font: 10pt \"DejaVu Sans Mono\";\n"
+"background-color: rgb(255, 255, 255);"));
+        deletePCData = new QPushButton(adminPanel);
+        deletePCData->setObjectName(QString::fromUtf8("deletePCData"));
+        deletePCData->setGeometry(QRect(30, 90, 111, 51));
+        deletePCData->setStyleSheet(QString::fromUtf8("font: 10pt \"DejaVu Sans Mono\";\n"
 "background-color: rgb(255, 255, 255);"));
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -287,10 +294,10 @@ public:
 "color: rgb(0, 0, 0);"));
         sinewaves = new QChartView(centralwidget);
         sinewaves->setObjectName(QString::fromUtf8("sinewaves"));
-        sinewaves->setGeometry(QRect(990, 500, 321, 201));
-        deleteSessionsPC = new QPushButton(centralwidget);
-        deleteSessionsPC->setObjectName(QString::fromUtf8("deleteSessionsPC"));
-        deleteSessionsPC->setGeometry(QRect(120, 500, 83, 25));
+        sinewaves->setGeometry(QRect(990, 540, 311, 201));
+        sites = new QComboBox(centralwidget);
+        sites->setObjectName(QString::fromUtf8("sites"));
+        sites->setGeometry(QRect(1000, 500, 291, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -304,6 +311,7 @@ public:
 
         menu->setDefault(false);
         power->setDefault(false);
+        sites->setCurrentIndex(-1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -338,8 +346,9 @@ public:
         dcHeadset->setText(QCoreApplication::translate("MainWindow", "Disconnect\n"
 "Headset", nullptr));
         chargeDevice->setText(QCoreApplication::translate("MainWindow", "Charge Device", nullptr));
+        deletePCData->setText(QCoreApplication::translate("MainWindow", "Delete PC Data", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Admin Panel", nullptr));
-        deleteSessionsPC->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        sites->setCurrentText(QString());
     } // retranslateUi
 
 };

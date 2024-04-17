@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QDateTime>
 #include <QtCharts>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,7 +29,8 @@ public:
     void printPc(QString str);
 
     //chart function
-    void displayChart(QtCharts::QLineSeries *series);
+    void displayChart(QtCharts::QLineSeries *series, int round);
+    void helpDisplayChart(int round, int site);
 
 private slots:
     void greenLightBlink();
@@ -49,6 +51,7 @@ private slots:
     void handleSubmitDateTime();
     void handleReconnectButton();
     void handleCountDown();
+    void handleComboBox(int index);
     void deleteSessionFile();
 
 private:
@@ -68,12 +71,15 @@ private:
     bool paused = false;
     bool redOn = false;
     bool sessionRunning = false;
+    int currentRound = 0;
+    bool midSession = false;
 
     //functions
     void hideMenus();
     void turnOffLights();
     void delay(int time = 1000);
     void sessionTimerDecrease();
+    void increaseProgresssBar(int amount);
     bool sessionChecks();
 
 };

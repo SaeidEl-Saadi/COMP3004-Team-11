@@ -1,7 +1,6 @@
 #ifndef SESSION_H
 #define SESSION_H
 #include "site.h"
-#include "brainregion.h"
 #include <QDateTime>
 #include <QObject>
 #include <QVector>
