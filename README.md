@@ -19,7 +19,7 @@
 - The project builds on the course VM (3004W24)
 - Each part of the documentation has been labeled to show who completed that part (no label means it was a group effort)
 
-### Outline:
+### Responsibilities:
 
 Saeid El-Saadi
 
