@@ -27,6 +27,11 @@ Saeid El-Saadi
 - Documentation (use cases, diagrams, etc)
 - Button handlers, functions, etc
 
+Garrison Su
+- Upload part of the code
+- A bit of UI
+- Session sequence Diagram
+- Use case 5
 ### Organization:
 
 The submission is organized into two parts:
