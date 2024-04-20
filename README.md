@@ -26,9 +26,12 @@ Saeid El-Saadi
 - Almost all of the UI of implementation
 - Documentation (use cases, diagrams, etc)
 - Button handlers, functions, etc
+- Use case 1
 
 Garrison Su
 - Upload part of the code
+- Session part of code
+- general debugging
 - A bit of UI
 - Session sequence Diagram
 - Use case 5
