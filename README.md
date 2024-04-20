@@ -27,6 +27,8 @@ Saeid El-Saadi
 - Documentation (use cases, diagrams, etc)
 - Button handlers, functions, etc
 - Use case 1
+- State diagram
+- Handle lost connection sequence diagram
 
 Garrison Su
 - Upload part of the code
