@@ -11,3 +11,7 @@
 ### To run:
 
 - You need to install the following: sudo apt install libqt5charts5-dev
+
+### Note(s):
+
+- The project builds on the course VM (3004W24)
