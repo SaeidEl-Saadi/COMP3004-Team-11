@@ -35,6 +35,13 @@ Garrison Su
 - A bit of UI
 - Session sequence Diagram
 - Use case 5
+
+Bryson Kushner
+- Battery Low Response Sequence diagram
+- Requirements Traceability Matrix
+- UI/testing
+- Use case 2: Handle lost contact
+
 ### Organization:
 
 The submission is organized into two parts:
