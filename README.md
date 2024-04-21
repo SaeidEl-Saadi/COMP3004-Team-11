@@ -31,6 +31,7 @@ Saeid El-Saadi
 - Handle lost connection sequence diagram
 
 Garrison Su
+
 - Upload part of the code
 - Session part of code
 - general debugging
@@ -39,10 +40,19 @@ Garrison Su
 - Use case 5
 
 Bryson Kushner
+
 - Battery Low Response Sequence diagram
 - Requirements Traceability Matrix
 - UI/testing
 - Use case 2: Handle lost contact
+
+Thomas Cheesman
+
+- Use case
+- Signal generation and processing
+- Use Case: Set Date and Time
+- debugging
+- UML Class Diagram
 
 ### Organization:
 
