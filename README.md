@@ -60,3 +60,4 @@ The submission is organized into two parts:
 
 1. This github which houses the implentation portion of the project
 2. The documentation which is submitted through brightspace
+3. A video (mp4) file that is also included with the brightspace submission
