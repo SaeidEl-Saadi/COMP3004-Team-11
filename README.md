@@ -36,7 +36,7 @@ Garrison Su
 - Session part of code
 - general debugging
 - A bit of UI
-- Session sequence Diagram
+- Session history sequence Diagram
 - Use case 5
 
 Bryson Kushner
