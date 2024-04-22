@@ -57,13 +57,13 @@ Thomas Cheesman
 
 Yordan Slavchev
 
--Use Case 4
--Signal Gen and Processing
--Device, Session, Site
--Date logic on back-end
--Some UI (Charts Display)
--Main Sequence Diagram
--UML Class Diagram
+- Use Case 4
+- Signal Gen and Processing
+- Device, Session, Site
+- Date logic on back-end
+- Some UI (Charts Display)
+- Main Sequence Diagram
+- UML Class Diagram
 
 ### Organization:
 
