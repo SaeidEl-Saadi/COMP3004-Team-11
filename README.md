@@ -33,8 +33,7 @@ Saeid El-Saadi
 
 Garrison Su
 
-- Upload part of the code
-- Session part of code
+- Upload, Session part of the code
 - general debugging
 - A bit of UI
 - Session history sequence Diagram
