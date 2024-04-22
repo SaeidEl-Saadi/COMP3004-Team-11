@@ -10,6 +10,7 @@
 
 ### To run:
 
+- It is best to clone the project using the git CLI
 - You need to install the following: **sudo apt install libqt5charts5-dev**
 - With Qt creator, select the .pro file located in the build to load the project
 - Simply press the play/run button
